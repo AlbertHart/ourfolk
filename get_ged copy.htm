@@ -1,0 +1,322 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <title>GED Conversion</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./flatlab/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./flatlab/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="./flatlab/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+    <!-- for image gallery -->
+    <link href="./flatlab/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="./flatlab/css/gallery.css" />
+
+    <!--right slidebar-->
+    <link href="./flatlab/css/slidebars.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="./flatlab/css/style.css" rel="stylesheet">
+    <link href="./flatlab/css/style-responsive.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="paf_styles.css"></link>
+
+    <script async src="https://cse.google.com/cse.js?cx=003736524176309227229:whsyk9ptpff"></script>
+    <script src="./alh_common/alh_sprintf.js?v=278"></script>
+    <script src="./alh_common/alh_common.js?v=278"></script>
+    <script src="hart-ged.js?v=278"></script>
+    <script src="ged_read.js?v=278"></script>
+    <script src="bk_data.js?v=278"></script>
+            
+    <script>
+        var image_path = "https://ourfolkgen.com/images";
+    </script>
+
+  </head>
+
+  <style>
+      @media (min-width: 1500px) {
+        .container {
+            max-width: 1460px;
+        }
+        } 
+
+
+    </style>
+
+  <body class="boxed-page">
+      <div class="container">
+        <section id="container" class="">
+             <!--header start-->
+             <header class="header white-bg">
+                <div class="container">
+                    <div class="sidebar-toggle-box">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                    <!--logo start-->
+                    <a href="families.htm" class="logo">
+                        <img id=logo height='50'>
+                        <script>
+                            document.getElementById("logo").src = image_path + "/our-folk.jpg";
+                        </script>
+                    </a>
+                    <!--logo end-->
+                    <div class="nav notify-row" id="top_menu">
+                        <!--  notification start -->
+                        <div id=family_name class=title >Our Folk Genealogy Pages
+                           <br>(HartGen)</div>
+                            <!-- notification dropdown end -->
+                        </ul>
+                        <!--  notification end -->
+                    </div>
+    
+                    <div class="top-nav ">
+                        <!--search & user info start-->
+                            <div class="gcse-search"></div>
+     
+                        <!--search & user info end-->
+                    </div>
+                </div>
+            </header>
+            <!--header end-->
+
+            <!--sidebar start-->
+            <aside>
+                <div id="sidebar"  class="nav-collapse ">
+                    <script src="sidebar.js"></script>
+                </div>
+            </aside>
+            <!--sidebar end-->
+     
+      <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+          <!-- page start-->
+
+             
+          Please Select text file of which contents are to be read: 
+          <input type="file" id="txtfiletoread" />
+
+          
+        <!-- <textarea id="ged_js_text" rows="4">GED JS file will go here</textarea><br/> -->
+        <input type="button" id="dwn-btn" value="Download GED .js file"/>
+
+
+        <button id="confirm_btn">Download as BLOB</button>
+        <span id="stat_"></span>
+        <br>
+        <a id="blob">Download as Blob</a>
+        <a id="dataURI">Download as dataURI</a>
+
+
+        <!--
+            <div>The GED File Contents are as below:</div> 
+         <div id="filecontents">
+        </div>
+    -->
+
+  
+
+    <script>
+
+    var fileSelected;
+    var fileTobeRead;
+    var fileExtension;
+    var fileReader;
+    var ged_file_contents;
+    var js_file_name = "hart-ged.js";
+    var js_file_contents = "";
+
+    
+    window.onload = function () { 
+            //Check the support for the File API support 
+            if (window.File && window.FileReader && window.FileList && window.Blob) {
+                fileSelected = document.getElementById('txtfiletoread');
+                fileSelected.addEventListener('change', function (e) { 
+                    //Set the extension for the file 
+                    fileExtension = /.*.\.ged/; 
+                    //Get the file object 
+                    fileTobeRead = fileSelected.files[0];
+                    console.log("fileTobeRead: %s", fileSelected.files[0].name);
+                    console.log("fileTobeRead.name.match(fileExtension)): %s", fileTobeRead.name.match(fileExtension));
+                    //Check of the extension match 
+                    if (fileTobeRead.name.match(fileExtension)) { 
+                        //Initialize the FileReader object to read the 2file 
+                        fileReader = new FileReader(); 
+                        fileReader.onload = function (e) { 
+                            ged_file_contents = fileReader.result.substr(0,4900000); 
+                            ged_file_contents = ged_file_contents.replace(/\\/g, "/");
+                            console.log("ged_file_contents length: %d", ged_file_contents.length);
+
+                            //var fileContents = document.getElementById('filecontents'); 
+                            //fileContents.innerText = ged_file_contents; 
+
+                            // create .js file
+                            
+                            js_file_contents = "var ged_source = `\n";
+                            js_file_contents += ged_file_contents;
+                            js_file_contents += "\n`;\n";
+                            js_file_contents += sprintf("console.log(\"%s length: %s\", ged_source.length);\n", js_file_name);
+                            console.log("js_file_contents length: %d", js_file_contents.length);
+
+                            //var ged_js_elt = document.getElementById("ged_js_text");
+                            //ged_js_elt.innerText = js_file_contents;
+                        } 
+                        fileReader.readAsText(fileTobeRead); 
+                    } 
+                    else { 
+                        alert("Please select ged file"); 
+                    }
+            
+                }, false);
+            } 
+            else { 
+                alert("Files are not supported"); 
+            } 
+            }
+
+
+         function download(filename, text) {
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            element.setAttribute('download', filename);
+        
+            element.style.display = 'none';
+            document.body.appendChild(element);
+        
+            element.click();
+        
+            document.body.removeChild(element);
+        }
+        
+        // Start file download.
+        document.getElementById("dwn-btn").addEventListener("click", function(){
+            // Generate download of hello.txt file with some content
+            console.log("DOWNLOADING: %s js_file_contents length: %d", js_file_name, js_file_contents.length);
+            download(js_file_name, js_file_contents);
+        }, false);
+
+        // download as blob to prefent file size limit
+        // edited from https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob#Polyfill
+        function dataURIToBlob(dataURI) {
+            console.log(get_self());
+        var binStr = atob(dataURI.split(',')[1]),
+        len = binStr.length,
+        arr = new Uint8Array(len),
+        mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+
+        for (var i = 0; i < len; i++) {
+        arr[i] = binStr.charCodeAt(i);
+        }
+        console.log("ARR length: %s", len);
+
+        blob = new Blob([arr], {
+        type: mimeString
+        });
+        console.log("BLOB length: ", blob.length);
+
+        return new Blob([arr], {
+        type: mimeString
+        });
+
+        }
+
+        var dataURI_DL = function() {
+            console.log(get_self());
+
+        var dataURI = this.result;
+        var blob = dataURIToBlob(dataURI);
+        var url = URL.createObjectURL(blob);
+        var blobAnchor = document.getElementById('blob');
+        var dataURIAnchor = document.getElementById('dataURI');
+        blobAnchor.download = dataURIAnchor.download = 'yourFile.mp4';
+        blobAnchor.href = url;
+        dataURIAnchor.href = dataURI;
+        stat_.textContent = '';
+
+        blobAnchor.onclick = function() {
+        requestAnimationFrame(function() {
+            console.log(get_self());
+            URL.revokeObjectURL(url);
+        })
+        };
+        };
+
+        // That may seem stupid, but for the sake of the example, we'll first convert a blob to a dataURI...
+        var start = function() {
+            console.log(get_self());
+
+        stat_.textContent = 'Please wait while loading...';
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.onload = function() {
+        status.textContent = 'converting';
+        var fr = new FileReader();
+        fr.onload = dataURI_DL;
+
+        console.log("Before fr.readAsDataURL");
+        fr.readAsDataURL(this.response);
+        console.log("After fr.readAsDataURL");
+        };
+        console.log("Before xhr.open");
+        xhr.open('GET', 'https://dl.dropboxusercontent.com/s/bch2j17v6ny4ako/movie720p.mp4?dl=0');
+        console.log("Before xhr.send");
+        xhr.send();
+
+        confirm_btn.parentNode.removeChild(confirm_btn);
+        };
+
+        confirm_btn.onclick = start;
+
+    </script>
+
+
+
+          <!-- page end-->
+          </section>
+      </section>
+      <!--main content end-->
+
+     
+
+  </section>
+  
+  
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="./flatlab/js/jquery.js"></script>
+    <script src="./flatlab/js/bootstrap.bundle.min.js"></script>
+    <script class="include" type="text/javascript" src="./flatlab/js/jquery.dcjqaccordion.2.7.js"></script>
+    
+    <!-- for image gallery -->
+    <script src="./flatlab/assets/fancybox/source/jquery.fancybox.js"></script>
+    
+    
+    <script src="./flatlab/js/jquery.scrollTo.min.js"></script>
+    <script src="./flatlab/js/slidebars.min.js"></script>
+    <script src="./flatlab/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="./flatlab/js/respond.min.js" ></script>
+
+    <!--common script for all pages-->
+    <script src="./flatlab/js/common-scripts.js"></script>
+
+	<!-- for image gallery -->
+    <script src="./flatlab/js/modernizr.custom.js"></script>
+    <script src="./flatlab/js/toucheffects.js"></script>
+
+  <script type="text/javascript">
+  	// for image gallery
+      $(function() {
+        //    fancybox
+          jQuery(".fancybox").fancybox();
+      });
+
+  </script>
+
+
+  </body>
+</html>

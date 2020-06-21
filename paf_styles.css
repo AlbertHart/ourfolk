@@ -1,0 +1,507 @@
+<STYLE type="text/css">
+
+
+
+/* flatlab */
+
+# larger size?
+@media (min-width: 1200px) {
+    .xxcontainer {
+      max-width: 1140px;
+    }
+  }
+
+/*sidebar navigation*/
+
+#sidebar {
+    width: 220px;
+    height: 100%;
+    position: fixed;
+    background-color: #2a3542;
+    overflow-y: scroll;
+    margin-top: 30px;
+}
+
+.wrapper {
+    padding: 100px 15px 15px 15px;
+}
+
+.ged_out {
+    padding: 30px;
+
+}
+.gallery {
+   padding: 30px;
+
+}
+
+
+.normal
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 8pt;
+    COLOR: #000000;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.half
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 2pt;
+    COLOR: #000000;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+
+.title
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 12pt;
+    COLOR: #02116c;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.sources
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 7pt;
+    COLOR: #202020;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.source_main_title
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 8pt;
+    COLOR: #202020;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.source_title
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 7pt;
+    COLOR: #202020;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.source_title_italic
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 7pt;
+	FONT-STYLE: italic;
+    COLOR: #202020;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.source_text
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 7pt;
+    COLOR: #202020;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.source_publisher
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 7pt;
+	FONT-STYLE: italic;
+    COLOR: #202020;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.source_author
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 7pt;
+	FONT-STYLE: italic;
+    COLOR: #202020;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.heading
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10pt;
+    COLOR: #000050;
+
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.gen
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 12pt;
+    COLOR: #ffffff;
+    height: 40pt;
+    width: 100%;
+    background-color: #4040ff;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+
+
+.generation
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 12pt;
+    COLOR: #ffffff;
+    height: 25pt;
+    width: 50%;
+    background-color: #4040ff;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+
+.ancestor
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 12pt;
+    COLOR: #ffffff;
+    height: 20pt;
+    xxwidth: 100%;
+    background-color: #80e080;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+
+.descendant
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 12pt;
+    COLOR: #ffffff;
+    height: 20pt;
+    xxwidth: 100%;
+    background-color: #ec8080;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+
+.btn {
+    font-size: 0.8rem;
+    line-height: 1.2;
+}
+
+.image {
+    xxwidth: 30vw;
+}
+
+.image_div {
+    width: 95%;
+    background-color: #e0e0e0;
+}
+
+.image_note {
+    width: 100%;
+}
+
+.image_box {
+    border: 1px solid #404040;
+    #margin: 1px;
+    background-color: #f0f0e0; 
+    width: 80%;
+}
+
+.image_header {
+    text-align: center;
+    width: 100%; 
+    color: #202020; 
+    text-align: center;
+}
+
+.overlay_div1 {
+
+    left: 0;
+     top: 0;
+     width: 100%;
+     height: 100%;
+     position: fixed;
+     visibility: hidden;
+     background-color: #808080;
+     opacity: 1.00;
+     color: white;
+     visibility: hidden;
+     text-align: center;
+     z-index: 9999;
+
+}
+
+
+
+.overlay_image {
+    object-fit: contain;
+    max-height: 80vh;
+    height:auto;
+    width: 90vw;
+}
+
+
+.left {
+    width: 75vw;
+}
+
+
+.branch
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 12pt;
+    COLOR: #ff0000;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.toplinks
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10pt;
+    COLOR: #02116c;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.family_link
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 12pt;
+    COLOR: #ff1010;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.surname_links
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 9pt;
+    COLOR: #02116c;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.multiple
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10pt;
+    COLOR: #60a0ff;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+
+.subtable 
+{
+    background-image: url("./images/backgrounds/tanwall3.jpg");
+    width: 98%;
+}
+
+.subtable a {
+    FONT-WEIGHT: bold;
+    color: #1010ff;
+}
+
+.ancestor
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10pt;
+    COLOR: #2020ff;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.ancestor0
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10pt;
+    COLOR: #2020ff;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.ancestor1
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10pt;
+    COLOR: #ff2020;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.ancestor2
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10pt;
+    COLOR: #20ff20;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.ancestor3
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10pt;
+    COLOR: #20a0a0;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.ancestor4
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10pt;
+    COLOR: #a0a020;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.ancestor5
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10pt;
+    COLOR: #a020a0;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.ancestor6
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10pt;
+    COLOR: #0000ff;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.ancestor7
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10pt;
+    COLOR: #ff0000;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.ancestor8
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10pt;
+    COLOR: #00ff00;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.person
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 9pt;
+    COLOR: #02116c;
+    FONT-STYLE: normal;
+    FONT-FAMILY: verdana, arial, helvetica;
+    FONT-VARIANT: normal
+}
+.name
+{
+    FONT-WEIGHT: bold;
+    xxFONT-SIZE: 8pt;
+    COLOR: #02116c;
+    FONT-STYLE: normal;
+    FONT-FAMILY: verdana, arial, helvetica;
+    FONT-VARIANT: normal
+}
+.castle
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 9pt;
+    COLOR: #02116c;
+    FONT-STYLE: normal;
+    FONT-FAMILY: verdana, arial, helvetica;
+    FONT-VARIANT: normal
+}
+.salutation
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 9pt;
+    COLOR: #02116c;
+    FONT-STYLE: normal;
+    FONT-FAMILY: verdana, arial, helvetica;
+    FONT-VARIANT: normal
+}
+.body_cont
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 8pt;
+    COLOR: #000000;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.childnm
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 9pt;
+    COLOR: #02116c;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+
+.childt
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 9pt;
+    COLOR: #02116c;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.table_head
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 8pt;
+    COLOR: #02116c;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+
+.note_table {
+    background-image: url("./images/backgrounds/sepia.jpg");
+}
+.note_table th {
+    background-color: #ff4040;
+    font-size: 100%;
+    color: white;
+}
+
+.note_box {
+    background-color: #f0f0f0;
+    width: 95%;
+}
+.note_box th {
+    background-color: #0000ff;
+    color: white;
+    xxfont-size: 90%;
+}
+
+.note_quote {
+    background-color: #e0e0e0;
+    width: 95%;
+}
+.note_quote th {
+    background-color: #80ff80;
+    color: black;
+    xxfont-size: 90%;
+}
+
+.note_list {
+    background-color: #e0e0e0;
+    width: 95%;
+}
+.note_list th {
+    background-color: #ff8080;
+    color: black;
+    xxfont-size: 90%;
+}S
+
+.note_census table {
+    background-color: transparent;
+}
+.note_census {
+    background-color : transparent;
+    xxbackground-color: #404040;
+    color: white;
+    width: 80%;
+}
+.note_census th {
+    background-color : transparent;
+    background-color: #80000080;
+    xxbackground-color : transparent;
+    color: white;
+    xxfont-size: 90%;
+}
+.note_census td {
+    xxbackground-color: #404040;
+    background-color : transparent;
+    color: white;
+}
+
+
+.LINK
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 10pt;
+    COLOR: #02116c;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+.VLINK
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 8pt;
+    COLOR: #800080;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+
+TD
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 8pt;
+    COLOR: #000000;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+TH
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 8pt;
+    COLOR: #000000;
+    FONT-FAMILY: verdana, arial, helvetica
+}
+</STYLE>
+
+
+

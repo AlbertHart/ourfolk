@@ -1,0 +1,78 @@
+<html>
+
+<head>
+
+    <style>
+    .overlay_div {
+
+        left: 0;
+         top: 0;
+         width: 100%;
+         height: 100%;
+         position: fixed;
+         visibility: hidden;
+         background-color: black;
+         opacity: 0.85;
+         color: white;
+         visibility: hidden;
+         text-align: center;
+
+    }
+
+
+
+    .overlay_image {
+        object-fit: contain;
+        max-width:100%;
+        height:auto;
+    }
+
+    body {
+
+        width: 100%;
+         height: 100%;
+    }
+    </style>
+    
+   <script>
+      function show_overlay(text, image) {
+
+        console.log("SHOW OVERLAY");
+
+         var overlay_div = document.getElementById("overlay_div");
+
+         overlay_div.addEventListener('click', function(event) {
+            console.log("LISTENER OVERLAY: %s", overlay_div.style.visibility);
+            overlay_div.style.visibility = "hidden";
+         }, false);
+
+     
+         overlay_div.style.visibility = "visible";
+         
+
+         
+         overlay_div.innerHTML = `<br><center>
+            <img src= 'https://ourfolkgen.com/images/johnston/samuel-johnston-1830.jpg' 
+                class=overlay_image  />`;
+        overlay_div.innerHTML += "<br>" + text + "</br>";
+        overlay_div.innerHTML += `</center>`;
+
+      }
+   </script>
+
+</head>
+
+<body>
+
+   <div id="overlay_div" class="overlay_div" >OVERLAY DIV</div>
+
+   <a href="" onClick="show_overlay('Samuel Johnston.', 'imagename'); return false;">
+       <img src= 'https://ourfolkgen.com/images/johnston/samuel-johnston-1830.jpg'
+            style="width: 200px;" />
+    </a>
+
+    
+
+</body>
+
+</html>

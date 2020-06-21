@@ -1,0 +1,299 @@
+<html>
+        <head>
+      
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152244338-1"></script>
+        <script data-ad-client="ca-pub-0704525034147863" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'UA-152244338-1');
+        </script>
+        
+            <script src='ged_source.js'></script>
+
+            <script src="ged_read.js?v=278"></script>
+
+           
+         <script async src="https://cse.google.com/cse.js?cx=003736524176309227229:whsyk9ptpff"></script>
+            <script src="./alh_common/alh_sprintf.js?v=278"></script>
+         <script src="./alh_common/alh_common.js?v=278"></script>
+    
+        </head>
+    
+        <body>
+            
+        <div style="font-size: 20px;">
+            <br><button onclick="read_ged_file();">Read GED File</button>  
+            <br><button onclick="do_stringify();">Stringify</button>   
+    
+            <br><button onclick="do_save();">Save JSON</button> 
+ 
+        </div>   
+        
+        
+    <script>
+
+
+    // 0 @I1@ INDI
+    // 1 NAME Albert Douglass /Hart/
+
+
+    // 1 OBJE
+    // 2 FORM jpg
+    // 2 FILE D:/Dropbox/_VP_Images/ourfolk/images/hart/al-jr.jpg
+    // 2 TITL Albert D. Hart, Jr<br>1947-
+    // 2 _SCBK Y
+    // 2 _PRIM Y
+    // 2 _TYPE PHOTO
+    // 1 FAMS @F1@
+    // 1 FAMC @F2@
+    // 1 NOTE @NI1@
+    // 0 @NI1@ NOTE
+    // 1 CONC graduated from Wabash College - BA Math 1968, Indiana University MA Math 1971.
+    // 1 CONT On the winning (3 man) team of the first two sessions of the "Indiana College M
+    // 1 CONC athematics Competition" in 1966 and 1967.
+    // 1 CONT
+
+    // read and save OBJE stuff and add it to notes as #obje and #/obje
+    // if no note record create one
+    // place at first CONT - not as part of CONC (wituout CONT)
+
+    // convert get data to array
+    ged_lines = ged_source.split("\n");
+
+    var in_obje = false;
+    var have_obje = false;
+    var in_note_for_obje = false;   // in out note
+    var nkey = "";
+    var sobje = "";
+    var obje_array = [];
+    var note_code = "";
+    var iptr_code = "";
+
+    for (iline = 0; iline < ged_lines.length; iline++)
+    {
+         
+         ged_line = ged_lines[iline];
+
+         if (!in_skip && show_all) // || (iline % 10000) == 0)
+         {
+             console.log("***LINE %s. %s",iline, ged_line);
+         }
+
+         if (ged_line.length < 4)
+             continue;
+
+        // ilev scode sval
+        ilev = -1;
+         scode = "";
+         sval = "";
+         ipos = ged_line.indexOf(" ");
+         if (ipos != 1)
+         {
+             if (show_bad)
+                console.log("BAD IPOS: %s. %s",iline, ged_line);
+             continue;
+         }
+         if (ipos >= 0)
+         {
+             ilev = ged_line.substr(0, ipos);
+             ged_line = ged_line.substr(ipos+1);
+
+             ipos2 = ged_line.indexOf(" ");
+             if (ipos2 >= 0)
+             {
+                 scode = ged_line.substr(0, ipos2);
+                 sval = ged_line.substr(ipos2 + 1);
+             }
+             else
+             {
+                 scode = ged_line;
+                 sval = "";
+             }
+         }
+
+
+         sval = sval.trim();
+         sval = sval.replace(/"/g, "'");
+         sval = sval.replace(/\\/g, "/");
+
+         sval1 = sval;
+         //sval = sval.replace(/\\u000b/, "");
+         //console.log("ILEV: %s SCODE: '%s' SVAL: '%s'", ilev, scode, sval);
+         // remove any non-standard ascii characters
+         sval = sval.replace(/\v/g, " ");
+         sval = sval.replace(/[^\x00-\x7F]/g, " ");
+         sval = sval.replace(/[\u{0080}-\u{FFFF}]/gu," ");
+         
+         
+         sval = sval.trim();
+
+         if (sval1 != sval)
+         {
+             if (show_all)
+                console.log("SVAL CHANGED: ILEV: %s SCODE: '%s' SVAL: '%s'\n    OLD: '%s'", ilev, scode, sval, sval1);
+         }
+         //console.log("ILEV: %s SCODE: '%s' SVAL: '%s'", ilev, scode, sval);
+         if (scode == "")
+         {
+             throw("SCODE not found: " + ged_line);
+         }
+
+         // we cannot save the whole ged to local storage.
+         // only read some,for a while
+         if (iline > lines_to_read)
+         {
+             throw("ILINE BREAK at " + iline);
+             break;  // for testing
+         }
+
+         if (in_skip && ilev > 0)
+            continue;
+
+        if (ilev == 0)
+        {
+             if (show_all)
+                console.log("ILEV: %s SCODE: %s SVAL: %s", ilev, scode, sval);
+             // main objects
+             if (sval == "")
+                 sval = scode;   // for HEAD
+
+
+            if (single_record && single_record != "")
+            {
+                
+                if (single_record_processed)
+                {
+                    console.log("Break after single record");
+                    break;
+                }
+                if (scode == single_record)
+                {
+                    // process this record
+                    console.log("Start single record - end skip");
+                    in_skip = false;
+                    single_record_processed = true;
+                }
+                else
+                {
+                    console.log("START SKIP");
+                    in_skip = true;
+                    continue;
+                }
+ 
+            }
+
+            
+
+            if (in_obje)
+            {
+                // last obje was not closed
+                console.log("OBJE NOT CLOSED: %s", note_key);
+                push_obje();
+            }
+            if (have_obje)
+            {
+                // next level should be note for our obje
+
+                if (scode == note_key)
+                {
+                    // this is the note for our OBJE
+                    in_note_for_obje = true;
+                }
+                else
+                {
+                    // level 0 which is not our note
+                    if (!in_note_for_obje)
+                        sout += sprintf("0 %s NOTE\n", note_key);
+                    obje_out();
+                    have_obje = false;
+                    in_note_for_obje = false;
+                    var obje_array = []; 
+                }
+            }
+        } // end ilev == 0
+
+
+        if (ilev == 1)
+        {
+            // save OBJE's
+            if (scode == "OBJE")
+            {
+                // new OBJE
+                if (in_obje)
+                {
+                    // complete last obje             
+                    push_obje();
+                }
+                sobje = "";
+                obje_file = "";
+                obje_title = "";
+                obje_conc = "";
+                continue;
+            }
+            if (in_obje)
+            {
+                // save FILE, TITLE and CONC
+                if (scode == "FILE")
+                    obje_file = sval;
+                if (scode == "TITLE")
+                    obje_title = sval;
+                if (scode == "CONC")
+                    obje_conc += sval;
+                continue;
+            }
+
+            if (in_note_for_obje)
+            {
+                // at first CONT, add our images
+                if (scode == "CONC")
+                {
+                    // just output CONC
+                }
+                else if (scode == "CONC")
+                {
+                    obje_out();
+                    in_note_for_obje = false;
+                }
+                else
+                {
+                    console.log("UNKNOWN NOTE entry: %s", ged_line);
+                    obje_out();
+                    in_note_for_obje = false;
+                }
+            }
+        }   // end ilev == 1
+        sout += ged_line + "\n";
+    } // end loop
+
+    function push_obje()
+    {
+        sobje = sprintf(`#obje %s\n", obje_file)
+        sobje += "#title %s\n", obje_title;
+        if (obje_conc)
+            sobje += "#conc %s\n", obje_conc);
+        sobje += "/#obje\n";
+        obje_array.push(sobje);
+        in_obje = false;
+    }
+
+
+
+    function obje_out()
+    {
+        // add our obje stuff to current note
+        for (ii = 0; ii < obje_array.length; ii++)
+        {
+            sout += obje_array[ii];
+        }
+    }
+
+
+
+    </script>
+
+</body>
+</html>

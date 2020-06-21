@@ -1,0 +1,439 @@
+<!doctype html>
+<html>
+  <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-152244338-1"></script>
+    <script data-ad-client="ca-pub-0704525034147863" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-152244338-1');
+</script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>Families</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./flatlab/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./flatlab/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="./flatlab/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    
+  
+    <!-- Custom styles for this template -->
+    <link href="./flatlab/css/style.css" rel="stylesheet">
+    <link href="./flatlab/css/style-responsive.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="paf_styles.css"></link>
+
+    <script async src="https://cse.google.com/cse.js?cx=003736524176309227229:whsyk9ptpff"></script>
+    <script src="./alh_common/alh_sprintf.js?v=278"></script>
+    <script src="./alh_common/alh_common.js?v=278"></script>
+
+    <!-- ged_common is not supposed to change much -->
+    <script src="ged_common.js?v=278"></script>
+    <script src="bk_data.js?v=278"></script>
+
+    <script>
+
+      load_js_files();       
+
+    // this is ruin only after ged_source is set.
+    function process_ged_file()
+    {
+        console.log(get_self());
+
+        if (!ged_source)
+        {
+            console.log("ged_source not set");
+            return;
+        }
+        read_ged_file();
+        
+        process_families();
+    }
+    
+    </script>
+
+ 
+
+  </head>
+
+  <body class="boxed-page">
+      <div class="container">
+        <section id="container" class="">
+             <!--header start-->
+             <header class="header white-bg">
+                <div class="container">
+                    <div class="sidebar-toggle-box">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                    <!--logo start-->
+                    <a href="families.htm" class="logo">
+                        <img id=logo height='50'>
+                        <script>
+                            document.getElementById("logo").src = image_path + "/our-folk.jpg";
+                        </script>
+                    </a>
+                    <!--logo end-->
+                    <div class="nav notify-row" id="top_menu">
+                        <!--  notification start -->
+                    <style>
+                    .notify-row {
+                        float: left;
+                        margin-top: 15px;
+                        margin-left: 15px;
+                        width: 60%;
+                    }
+                        </style>
+                        
+                        <div  class=title >Our Folk Genealogy Pages (HartGen)</div>
+                            <!-- notification dropdown end -->
+                        </ul>
+                        <!--  notification end -->
+                    </div>
+                    <div class="top-nav ">
+                        <!--search & user info start-->
+                            <div class="gcse-search"></div>
+                        <!--search & user info end-->
+                    </div>
+                </div>
+            </header>
+            <!--header end-->
+
+            <!--sidebar start-->
+            <aside>
+                <div id="sidebar"  class="nav-collapse ">
+                    <script src="sidebar.js"></script>
+                </div>
+            </aside>
+            <!--sidebar end-->
+            
+            <!--main content start-->
+            <section id="main-content">
+              <section id="main_wrapper" class=" wrapper">
+
+                <div class="row">
+                        <div class="col-sm-12	col-md-6 col-lg-4 col-xl-3 ">
+                        sm-12	md-6 lg-4 xl-3 
+                    
+                </div>
+
+                
+     
+              </section>
+
+              <!-- try footer here-->
+ 
+              <div class="text-center">
+                    <script>do_footer();</script>
+                <a href="#" class="go-top">
+                    <i class="fa fa-angle-up"></i>
+                </a>
+                </div>
+            </section>
+            <!--main content end-->
+            
+
+
+      </section>
+      </div>
+      
+      <script>
+
+    var iptr;
+    var fptr;
+    var cptr;
+    var pptr;
+
+    var notes;
+
+    //var show_all = true;
+    //var single_record = "@I6@";
+
+    
+    var ged_objects;
+
+    var sdiv = "";
+
+    var ancestors = [];
+    var generations_to_show = 2;
+
+    var person_out = {};
+
+    var shtml = "";
+
+    var image_colspan = 6;
+
+    function get_family_parents(no, generations)
+    {
+        console.log(get_self(no));
+        id = sprintf("@I%s@", no);
+    
+        iptr = get_person(id);
+
+        get_family_ancestors(id, generations);
+
+        
+    }
+
+    function do_families()
+    {
+
+
+        console.log(get_self());
+        //sleft = "";
+        sgallery = `<div class="row">\n`;
+
+        for (generation = 1; generation < generations_to_show; generation++)
+        {
+            console.log("generation: %s length: %s", generation, ancestors[generation].length);
+            for (ia = 0; ia < ancestors[generation].length; ia++)
+            {
+                aptr = get_person(ancestors[generation][ia]);
+                console.log("%s %s: %s %s", generation, ia, aptr.id, aptr.full_name);
+                do_person(aptr.id);
+
+            }
+
+        }
+
+
+        //sleft += "<br>";
+
+        //elt = document.getElementById("ged_out");
+        //elt.innerHTML = sleft;
+    }
+
+
+    
+    function get_family_ancestors(id, generations)
+    {
+        console.log(get_self(id, generations));
+        generation = 0;
+        ancestors[0] = [id];
+
+
+        for (generation = 0; generation < generations; generation++)
+        {
+            console.log("generation: %s ancestors.length: %s", generation, ancestors[generation].length);
+            ancestors[generation + 1] = [];
+            for (ia = 0; ia < ancestors[generation].length; ia++)
+            {
+    
+
+                id = ancestors[generation][ia];
+                
+                aptr = get_person(id);
+                console.log("generation: %s ancestor id: %s %s", generation, id, aptr.NAME);
+
+                pptr = ged_objects[aptr.FAMC];
+                if (pptr)
+                {
+                    console.log("generation: %s ia: %s aptr: %s famc: %s HUSB: %s WIFE: %s", 
+                        generation, ia, aptr.code, aptr.famc, pptr.HUSB, pptr.WIFE)
+                    if (pptr.HUSB)
+                    {
+                        parent_obj = get_person(pptr.HUSB);
+                        add_to_array(ancestors[generation + 1], pptr.HUSB);
+                        do_person(parent_obj.id);
+                    }
+                    
+                    if (pptr.WIFE)
+                    {
+                        parent_obj = get_person(pptr.WIFE);
+                        add_to_array(ancestors[generation + 1], pptr.WIFE);
+                        do_person(parent_obj.id);
+                    }
+                }
+
+            }
+
+            
+
+        }
+    }
+
+    
+    function process_families()
+    {
+    
+        console.log(get_self());
+
+
+        shtml += `<hr><a name='anchor'><h3> Hart and Kimball Family</h3>`;
+        shtml += `<div class="row">\n`;
+    
+        
+        do_person(1); //Albert Douglass Hart, Jr</a></li>
+        do_person(2); //Sally Johnston Kimball</a></li>
+        do_person(11); //Richard Dixon Hart</a></li>
+        do_person(134); //Carol Jean Hobbs</a></li>
+
+
+        do_person(10); //Barbara Jean Hart</a></li> 
+        do_person(125); // James Melvin Smith</a></li> 
+        do_person(7); //Susan May Kimball</a></li> 
+        do_person(12); //Jon Edward Erikson</a></li> 
+        do_person(460); //James Morton Kimball</a></li> 
+        do_person(461); //Cindy Sue Bush</a></li> 
+
+        image_colspan = 8;
+
+        shtml += `</div>`;
+        shtml += `<hr><a name='anchor'><h3> Hart Parents and Grand Parents</h3>`;
+        shtml += `<div class="row">\n`;
+
+        get_family_parents(1, 2);
+
+        shtml += `</div>`;
+        shtml += `<hr><a name='anchor'><h3> Kimball Parents and Grand Parents</h3>`;
+        shtml += `<div class="row">\n`;
+
+        get_family_parents(2, 2);
+
+        shtml += `</div>`;
+        shtml += `<hr><a name='anchor'><h3> Hobbs Parents and Grand Parents</h3>`;
+        shtml += `<div class="row">\n`;
+
+
+        get_family_parents(134, 2);
+
+
+        shtml += `</div>`;
+        shtml += `<hr><a name='anchor'><h3> Smith Parents and Grand Parents</h3>`;
+        shtml += `<div class="row">\n`;
+
+        get_family_parents(125, 2);
+
+
+
+        shtml += `</div>`;
+        shtml += `<hr><a name='anchor'><h3> Erikson Parents and Grand Parents</h3>`;
+        shtml += `<div class="row">\n`;
+
+        get_family_parents(12, 2);
+
+        shtml += `</div>`;
+        shtml += `<hr><a name='anchor'><h3> Bush Parents and Grand Parents</h3>`;
+        shtml += `<div class="row">\n`;
+
+        
+        get_family_parents(461, 2);
+        
+
+        shtml += `</div>`;
+        shtml += `<hr><a name='anchor'><h3> Hart Cousins and their Parents</h3>`;
+        shtml += `<div class="row">\n`;    
+        
+        
+        do_person(112); // Norwood Alan "Woody" Hart*	B: 29 MAR 1946
+        do_person(113); // Robert McDowell Hart*	B: 27 FEB 1949
+        do_person(114); // Jonathan Eaton Hart*	B: 28 OCT 1954
+        do_person(4812); // William Douglass Hart
+
+        get_family_parents(112, 1);
+
+
+        shtml += `</div>`;
+        shtml += `<hr><a name='anchor'><h3> Kimball Cousins and their Parents</h3>`;
+        shtml += `<div class="row">\n`;    
+
+        do_person(477); // Alden Rebecca Spooner*
+        do_person(476); // Anne Leland Spooner
+
+        get_family_parents(477, 1);
+
+        shtml += `</div>`;
+        shtml += `<hr><a name='anchor'><h3> Johnston Cousins and their Parents</h3>`;
+        shtml += `<div class="row">\n`;    
+
+        do_person(455); // Abby Winfield Johnston*	B: 16 MAR 1940
+        do_person(456); // Nancy Adams Johnston*
+        get_family_parents(455, 1);
+
+
+            
+
+        shtml += `</div>`;   
+
+        shtml += "<br><h3><a href=xml_generator.htm>List of all names</a></h3><br>";
+        elt = document.getElementById("main_wrapper");
+        elt.innerHTML = shtml;
+    }
+
+
+    function do_person(no)
+    {
+
+        id = sprintf("@I%s@", no);
+    
+        iptr = get_person(id);
+
+        if (person_out[id])
+            return;
+
+        person_out[id] = true;
+
+      
+
+        
+        if (image_colspan == 8)
+            sdiv = "<div class='col-sm-4	col-md-3 col-lg-2 col-xl-2 image_box'>\n";
+        else
+            sdiv = "<div class='col-sm-6	col-md-4 col-lg-3 col-xl-3 image_box'>\n";
+
+        sdiv += sprintf("<a href=ged_person.htm?id=%s>", iptr.id);
+
+        sdiv += sprintf("<center><b>%s</b></center>\n", iptr.full_name);
+
+
+        bret = get_first_image(iptr, "div", "", true);
+        //console.log("bret: %s iptr: %s %s", bret, iptr.code, "");
+
+        if (!bret)
+        {
+            if (iptr.SEX == "F")
+                image_file = image_path + "/generic-avatar-female-300.png";
+            else
+                image_file = image_path + "/generic-avatar-male-300.png";
+
+            simg_html = sprintf("<img src='%s' style='float: left; width: 100%%; padding:2px; ' />", image_file);
+            //console.log("ADD to sdiv: %s", simg_html);
+            sdiv += simg_html;
+
+        }
+
+
+        sdiv += "</a></div>\n";
+
+        shtml += sdiv;
+
+    }
+
+
+
+
+    
+    
+    </script>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="./flatlab/js/jquery.js"></script>
+    <script src="./flatlab/js/bootstrap.bundle.min.js"></script>
+    <script class="include" type="text/javascript" src="./flatlab/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="./flatlab/js/jquery.scrollTo.min.js"></script>
+    <script src="./flatlab/js/slidebars.min.js"></script>
+    <script src="./flatlab/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="./flatlab/js/respond.min.js" ></script>
+
+    <!--common script for all pages-->
+    <script src="./flatlab/js/common-scripts.js"></script>
+
+  </body>
+</html>

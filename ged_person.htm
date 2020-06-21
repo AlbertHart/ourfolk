@@ -1,0 +1,981 @@
+<!doctype html>
+<html>
+  <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152244338-1"></script>
+    <script data-ad-client="ca-pub-0704525034147863" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-152244338-1');
+    </script>
+    
+      
+
+
+    
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+
+    <title>Our Folk</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./flatlab/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./flatlab/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="./flatlab/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    
+    
+    <!-- Custom styles for this template -->
+    <link href="./flatlab/css/style.css" rel="stylesheet">
+    <link href="./flatlab/css/style-responsive.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="paf_styles.css"></link>
+
+
+    <script async src="https://cse.google.com/cse.js?cx=003736524176309227229:whsyk9ptpff"></script>
+    <script src="./alh_common/alh_sprintf.js?v=278"></script>
+
+    <script src="./alh_common/alh_common.js?v=278"></script>
+    
+    <!-- ged_common is not supposed to change much -->
+    <script src="ged_common.js?v=278"></script>
+
+    <script src="bk_data.js?v=278"></script>
+
+    <script>
+
+      load_js_files();
+
+ 
+        
+
+    // this is ruin only after ged_source is set.
+    function process_ged_file()
+    {
+        console.log(get_self());
+
+            if (!ged_source)
+            {
+                console.log("ged_source not set");
+                return;
+            }
+        console.log("Calling read_ged_file");
+        read_ged_file();
+        
+        do_page(id);
+    }
+    
+    </script>
+ 
+
+  </head>
+
+  <style>
+      @media (min-width: 1500px) {
+        .container {
+            max-width: 1460px;
+        }
+        }
+  
+  </style>
+
+  <body class="boxed-page">
+      <div class="container">
+        <section id="container" class="">
+             <!--header start-->
+             <header class="header white-bg">
+                <div class="container">
+                    <div class="sidebar-toggle-box">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                    <!--logo start-->
+                    <a href="families.htm" class="logo">
+                        <img id=logo height='50'>
+                        <script>
+                            document.getElementById("logo").src = image_path + "/our-folk.jpg";
+                        </script>
+                    </a>
+                    <!--logo end-->
+                    <div class="nav notify-row" id="top_menu">
+                        <!--  notification start -->
+                        <div id=family_name class=title >Our Folk Genealogy Pages
+                           <br>(HartGen)</div>
+                            <!-- notification dropdown end -->
+                        </ul>
+                        <!--  notification end -->
+                    </div>
+                    
+                    <div class="top-nav ">
+                        <!--search & user info start-->
+                            <div class="gcse-search"></div>
+                       
+                        <!--search & user info end-->
+                    </div>
+                </div>
+            </header>
+            <!--header end-->
+
+            <!--sidebar start-->
+            <aside>
+                <div id="sidebar"  class="nav-collapse ">
+                    <script src="sidebar.js"></script>
+                </div>
+            </aside>
+            <!--sidebar end-->
+            
+            <!--main content start-->
+            <section id="main-content">
+                <section class=" wrapper">
+                    <div  id="overlay_div1" class="overlay_div1">
+                        <div  class="container-fluid px-0">
+                        <div  class="row">
+                            <div id="overlay_div2" class="col-md-12">
+                            
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div id="overlay_divx" class="overlay_divx" ></div>
+
+
+                    <div class="row">
+                        <div class="col-12 gallery">
+ 
+
+                                <div id=gallery1>
+                                            
+                                </div>
+
+                        </div>
+                        <div class="col-12 ged_out">
+                            <div class="row">
+
+                                    <div id=ged_out1>
+                                    </div>
+                                    
+                                        
+                            </div>
+                        </div>
+    
+                    </div>
+                    <div class="row">
+                            <div class="col-12 gallery">
+        
+        
+                                   <div id=gallery2>
+                                                    
+
+                                    </div>
+                                </div>
+                            <div class="col-12 ged_out">
+                                <div class="row">
+    
+                                        <div id=ged_out2>
+                                        </div>
+                                        
+                                            
+                                </div>
+                            </div>
+                    </div>
+        
+                    <div class="row">
+                        <div class="col-12 ged_out" id=ged_out3>
+
+                        </div>
+                                
+                        </div>
+
+
+
+
+
+
+
+
+
+
+                 
+                </section>
+
+
+ 
+
+            <!-- try footer here-->
+
+            <div id=footer class="text-center">
+                <script>do_footer();</script>
+                <a href="#" class="go-top">
+                    <i class="fa fa-angle-up"></i>
+                </a>
+            </div>
+
+        </section>
+        <!--main content end-->
+    
+
+
+      
+    <!--container end-->
+    </section>
+    </div>
+      
+      <script>
+
+    var iptr;
+    var fptr;
+    var cptr;
+    var pptr;
+
+    var notes;
+ 
+    
+    var source_object;
+    
+    //var show_all = true;
+    //var single_record = "@I104@";
+
+    
+    var ged_objects;
+    var child_array = [];
+
+    
+
+    
+
+    id = get_url_var("id");
+    if (id == "")
+        id = "1";
+   if (id.substr(0,1) != "@")
+        id = "@I" + id + "@";
+    
+
+    //show_all = true;
+
+    
+
+
+    
+    
+
+    var sgallery;
+    var sgallery2;
+
+
+    var schart;
+
+    
+
+    
+
+    function get_images_for_family(iptr, use_note_images)
+    {
+
+       
+
+        var fams_array = get_values_array(iptr.FAMS); // array of one or more values
+
+        // get spouses first
+        for (var ifam = 0; ifam < fams_array.length; ifam++)
+        {
+            fams = fams_array[ifam];
+            fptr = ged_objects[fams];
+            sptr = get_spouse_record(iptr, fptr);
+            if (sptr)
+            {
+                get_first_image(sptr, "gallery_person", husband_wife(sptr), use_note_images);
+            }
+        }
+
+        // get children
+        for (var ifam = 0; ifam < fams_array.length; ifam++)
+        {
+            fams = fams_array[ifam];
+            fptr = ged_objects[fams];
+            sptr = get_spouse_record(iptr, fptr);
+            if (sptr)
+            {
+
+
+                chil = get_values_array(fptr.CHIL); // array of one or more values
+    
+                image_header = "Children";
+
+                for (var ic = 0; ic < chil.length; ic++)
+                {
+                    ckey = chil[ic];
+                    cptr = get_person(ckey);
+                    
+                    image_header = cptr.salutation;
+
+                    bret = get_first_image(cptr, "gallery_person", son_daughter(cptr), use_note_images);
+                    if (bret)
+                        image_header = "";
+   
+                    }
+                }
+            }
+            
+    }
+
+    function get_images_for_parents(iptr, swhose, use_note_images)
+    {
+        if (!iptr.FAMC) 
+            return;
+
+        fptr = ged_objects[iptr.FAMC];
+        console.log("FPTR: %s %s", fptr.HUSB ? fptr.HUSB : null, fptr.WIFE ? fptr.WIFE: null);
+        if (fptr)
+        {
+            if (fptr.HUSB)
+            {
+                pptr = get_person(fptr.HUSB);
+                
+                get_first_image(pptr, "gallery_person", swhose + "Father" , use_note_images);
+            }
+            
+            if (fptr.WIFE)
+            {
+                pptr = get_person(fptr.WIFE);
+                
+                get_first_image(pptr, "gallery_person", swhose + "Mother", use_note_images);
+            }
+        }
+
+
+    }
+
+
+    
+
+    function do_page(id)
+    {
+        //console.log(get_self(id));
+        ikey = id;
+        iptr = get_person(ikey);
+
+        document.title = iptr.full_name + " - Our Folk";
+        
+
+        sleft = "";
+
+        sgallery = `<div class="row">\n`;
+
+        sgallery2 = `<div class="row">\n`;
+
+
+
+        sleft += sprintf("<div class='gen'>%s<br>%s</div><br>\n", iptr.full_name, get_short_full_dates(iptr));
+
+
+        get_first_image(iptr, "gallery_person", "", true);
+        get_first_image(iptr, "gallery_person", "", true);
+        get_images_for_parents(iptr, "");
+        get_images_for_family(iptr, true); // notes first
+        get_images_for_family(iptr, false); // rest - should not be any?
+
+        sleft += show_dates(iptr);    
+
+        sleft += get_parents(iptr, false);
+        
+        // like to get 1st spouse image here too
+        var fams_array = get_values_array(iptr.FAMS); // array of one or more values
+
+        sleft += "<br>";
+
+        if (fams_array.length > 1)
+        {
+            sleft += "<h4>Marriages</h4>\n";
+        }
+
+        
+        for (var ifam = 0; ifam < fams_array.length; ifam++)
+        {
+            fams = fams_array[ifam];
+            console.log("CALLING do_spouse: %s", ifam);
+            do_spouse(fams, ifam);
+
+
+            
+        }
+    
+        sleft += sprintf(`<br><a href='relatives.htm?id=%s'><button type='button' class='btn btn-info'>Relatives</button></a>`, iptr.id);
+
+        sleft += sprintf(` - <a href='ancestors.htm?id=%s'><button type='button' class='btn btn-info'>Ancestors</button></a>`, iptr.id);
+
+        sleft += sprintf(` - <a href='descendants.htm?id=%s'><button type='button' class='btn btn-info'>Descendants</button></a><br>`, iptr.id);
+
+
+        // output first part and first images 
+
+        elt = document.getElementById("ged_out1");
+        elt.innerHTML = sleft;
+        sleft = "";
+
+       
+        get_images(iptr, "gallery_person", "", 999);
+
+        chart_made = false;
+    
+
+        
+
+        for (var ifam = 0; ifam < fams_array.length; ifam++)
+        {
+            fams = fams_array[ifam];
+
+
+            fptr = ged_objects[fams];
+
+            sleft += sprintf("<a id='CH%s'/>", ifam);
+            sleft += make_chart(iptr, fptr);
+            chart_made = true;
+
+            if (ifam == 0)
+            {
+                if (iptr.OCCU)
+                    sleft += sprintf("<br>%s was a <b>%s</b>.<br>", iptr.salutation, iptr.OCCU);
+
+                sleft += do_notes(iptr);
+
+            }
+
+    
+            fptr = ged_objects[fams];
+            if (!fptr)
+            {
+                console.log("FAMILY NOT FOUND: %s", fams);
+                throw_stop("FAMILY NOT FOUND");
+                return;
+            }
+
+            
+            
+    
+            if (iptr.SEX == "M")
+                skey = fptr.WIFE;
+            else
+                skey = fptr.HUSB;
+            if (skey)
+            {
+                sptr = get_person(skey);
+
+                if (fptr.NOTE)
+                {
+                    //console.log("FPTR NOTES: %s", iptr.full_name);
+                    sleft += sprintf("<center><font class=heading>Marriage to %s</font></center>\n", sptr.full_name);
+                    sleft +=   get_notes(fptr);
+                }
+       
+                if (sptr && sptr.OCCU)
+                    sleft += sprintf("<br>%s was a <b>%s</b>.<br>", sptr.salutation, sptr.OCCU);
+
+                sleft += do_notes(sptr);
+            }
+
+            // under chart - get any images for parents
+
+               
+            //get_images_for_parents(sptr, husband_wife(sptr) + "'s ");
+            get_images_for_parents(sptr, sptr.salutation + "'s ");
+
+            
+        }
+
+        
+
+        if (!chart_made)
+        {
+            sleft += make_chart(iptr, null); // no family
+
+            if (iptr.OCCU)
+                sleft += sprintf("<br>%s was a <b>%s</b>.<br>", iptr.salutation, iptr.OCCU);
+
+            sleft += do_notes(iptr);
+
+        }
+
+        
+        elt = document.getElementById("ged_out2");
+        elt.innerHTML = sleft;
+
+        elt = document.getElementById("gallery1");
+        sgallery += "</div>\n";
+        elt.innerHTML = sgallery;
+
+
+
+        elt = document.getElementById("gallery2");
+        sgallery2 += "</div>\n";
+        elt.innerHTML = sgallery2;
+
+        sleft = "";
+        sgallery = `<div class="row">\n`;
+        
+        
+
+        //console.log("CHAN: %s %s", iptr.CHAN, get_ged_value(iptr.CHAN.DATE));
+        if (iptr.CHAN && iptr.CHAN.DATE)
+        {
+            sleft += sprintf("<p><i><b>Last change</b> (on this page): %s</i></p>\n", get_ged_value(iptr.CHAN.DATE));
+            //console.log("Add to page");
+        }
+
+        show_sources();
+
+        elt = document.getElementById("ged_out3");
+        elt.innerHTML = sleft;
+
+  
+  
+
+    }
+
+    function show_sources()
+    {
+        /***
+            ABBR: "Elmwood Historical Society - indexed scrapbooks"
+            NOTE:
+            CONT: "The Elmwood Historical Society maintains the Loredo Taft Museum, 302 N. Magnolia, Elmwood, IL 61529.  They are currently open on Wednesday afternoons from 1 to 4. You can call (309) 742-7791 or  (309) 742-2431 for more information."
+            value: "The Elmwood Historical has a number of scrapbooks containing newspaper clippings saved by Elmwood residents in the late 1800's and early 1900's. There is an every name index of each scrapbook which makes this an invaluable source for people researching Elmwood families."
+            __proto__: Object
+            PUBL: "Elmwood, Illinois"
+            TITL: "Elmwood Historical Society - indexed scrapbooks"
+            code: "@S15@"
+        ***/
+
+        // add to sleft for now
+        if (source_ids.length < 1)
+            return;
+
+        sleft += "<br><table>";
+        sleft += "<tr><td colspan=2><h3>Sources</h3></td></tr>\n";
+
+        for (ino = 0; ino < source_ids.length; ino++)
+        {
+            skey = source_ids[ino];
+            source_object = get_person(skey);
+            sleft += sprintf("<tr><td><b>%s.</b></td><td>%s</td></tr>\n", ino + 1, source_object.TITL);
+
+            sleft += sprintf("<tr><td></td><td><a id='%s'>\n", skey);
+
+            sleft += source_notes[skey];
+
+            if (source_object.TEXT)
+            {
+                console.log("source_object.NOTE: %s", source_object.NOTE);
+                sleft += get_notes(source_object, "Source");
+            }
+
+            if (source_object.NOTE)
+            {
+                console.log("source_object.NOTE: %s", source_object.NOTE);
+                sleft += get_notes(source_object, "Source");
+            }
+
+            if (source_object.AUTH)
+            {
+                sleft += sprintf("Author: %s<br>", source_object.AUTH);
+            }
+            if (source_object.PUBL)
+            {
+                if (source_object.PUBL.CONT)
+                {
+                    publ = source_object.PUBL.CONT;
+                    //console.log("PUBL: %s", publ);
+                }
+                else
+                {
+                    publ = get_ged_value(source_object.PUBL);
+                    //console.log("PUBL: %s", publ);
+                }
+                // PUBL #resource douglass-journey.htm
+                if (publ.start_with("#resource"))
+                {
+                    surl = publ.substr(10);
+                    console.log("publ: %s surl: %s", publ, surl);
+                    sleft += "See: "; 
+                    sleft += sprintf("<a href='%s'>%s</a><br>\n", surl, surl);
+                }
+                else if (publ.indexOf("http") >= 0)
+                {
+                    ipos1 = publ.indexOf("http");
+                    ipos2 = publ.indexOf(" ", ipos1);
+                    sleft += "See: ";
+                    sleft += publ.substr(0, ipos1);
+                    surl = publ.substr(ipos1, ipos2-ipos1);
+                    console.log("ipos1: %s ipos2: %s surl: %s", ipos1, ipos2, surl);
+                    sleft += sprintf("<a href='%s'>%s</a>\n", surl, surl);
+                    sleft += publ.substr(ipos2);
+                    sleft += "<br>\n";
+                }
+                else if (publ != "")
+                {
+                    sleft += sprintf("Publisher: %s<br>", publ);
+                }
+                
+            }
+            sleft += "<br></td></tr>\n";
+        }
+        sleft += "</table><br>\n";
+
+    }
+
+    function name_link(nkey, colspan)
+    {
+        if (!colspan)
+            colspan = 1;
+        slink = sprintf("<td colspan=%s align='center'>", colspan);
+        if (nkey)
+        {
+            nptr = get_person(nkey);
+            
+            slink += sprintf("<a href='?id=%s'><font class='ancestor'>%s</font><br>%s</a>\n",
+                nptr.id, nptr.full_name, get_years_from_dates(nptr));
+        } 
+        slink += "</td>";  
+        return(slink);
+    }
+    
+
+    function get_father_id(id)
+    {
+        //console.log(get_self(id));
+        if (!id || id == "")
+            return("");
+        irec = get_person(id);
+        famc = irec.FAMC;
+
+        if (!famc || famc == "")
+            return("");
+        frec = ged_objects[famc];
+        //console.log("get_father_id(%s): %s %s)", id, irec.NAME, frec.HUSB);
+        return(frec.HUSB);
+    }
+
+    function get_mother_id(id)
+    {
+        //console.log(get_self(id));
+        if (!id || id == "")
+            return("");
+        irec = get_person(id);
+        famc = irec.FAMC;
+
+        if (!famc || famc == "")
+            return("");
+        mrec = ged_objects[famc];
+        //console.log("get_mother_id(%s): %s %s)", id, irec.NAME, mrec.WIFE);
+        return(mrec.WIFE);
+    }
+
+
+    function make_chart(iptr, fptr)
+    {
+
+        console.log(get_self(iptr.code, fptr ? fptr.code : "null"));
+        console.log("iptr.fullname: %s", iptr.full_name);
+        smarriage = "Marriage Date";
+
+
+
+        if (!fptr)
+        {
+            first_id = iptr.code;
+            spouse_id = "";
+            srelationship1 = "-- Person --";
+            srelationship2 = "";
+            colspan = 2;
+        }
+        else if (iptr.SEX == "M")
+        {
+            first_id = fptr.HUSB;
+            spouse_id = fptr.WIFE;
+            srelationship1 = "-- Husband --";
+            srelationship2 = "-- Wife --";
+            colspan = 1;
+        }
+        else
+        {
+            first_id = fptr.WIFE;
+            spouse_id = fptr.HUSB;
+            srelationship1 = "-- Wife --";
+            srelationship2 = "-- Husband --";
+            colspan = 1;
+        }
+
+        sptr = null;
+        if (spouse_id)
+            sptr = ged_objects[spouse_id];
+
+
+
+        schart = "";
+        schart += sprintf("<table border='2' width=80%% cellpadding='2' align='center' background='%s/backgrounds/granite_lt.jpg'>\n", image_path);
+
+        schart += sprintf("<tr><td align='center'  colspan='2'><font class='heading'>-- %s Family --</font></td></tr>\n", iptr.full_name); 
+
+        schart += "<tr>\n";
+        if (!sptr)
+        {
+            schart += sprintf("<td align='center' colspan=2 width='680'><font class='heading'>%s</font></td>\n", srelationship1);
+        }
+        else
+        {
+            schart += sprintf("<td align='center' width='340'><font class='heading'>%s</font></td>\n", srelationship1);
+            schart += sprintf("<td align='center' width='340'><font class='heading'>%s</font></td>\n", srelationship2);
+        }
+        schart += "</tr>\n";
+
+
+        schart += "<tr>\n";
+        schart += name_link(iptr.code, colspan);
+        if (sptr)
+            schart += name_link(sptr.code);
+        schart += "</tr>\n";
+
+  
+
+        if (fptr && fptr.MARR)
+        {
+
+            smarriage = "";
+            if (fptr.MARR.DATE)
+                smarriage += " on <b>" + fptr.MARR.DATE + "</b>";
+            if (fptr.MARR.PLAC)
+                smarriage += " in <b>" + fptr.MARR.PLAC + "</b>";
+        
+
+            //schart += sprintf("<tr><td colspan='2' align='center'  ><font class='heading'>Marriage:</font>%s</td></tr>\n", smarriage);
+        }
+
+        var child_array = [];
+        if (fptr && fptr.CHIL)
+        {
+            var carray = get_values_array(fptr.CHIL);
+            console.log("fptr.CHIL: %s carray.length: %s", fptr.CHIL, carray.length);
+
+            starred = false;
+            schart += "<tr><td align='center'  colspan='2'><font class='heading'>-- Children --</font></td></tr>\n";
+            for (ic = 0; ic < carray.length; ic++)
+            {
+                cptr = get_person(carray[ic]);
+                
+
+                star = "";
+                fams_array2 = get_values_array(cptr.FAMS); // array of one or more values
+                for (ic2 = 0; ic2 < fams_array2.length; ic2++)
+                {
+                    fptr2 = ged_objects[fams_array2[ic2]];
+                    if (fptr2.CHIL)
+                    {
+                        star = "*";
+                        starred = true;
+                        child_array.push(fptr2);
+                    }
+                }
+
+                schart += "<tr><td align='center' >";
+     
+                schart += sprintf("<a href='?id=%s'><font class='ancestor'>%s%s</font></td><td>%s</a>",
+                    cptr.id, cptr.full_name, star, get_short_full_dates(cptr));
+
+                
+
+                schart += "</td></tr>\n";
+
+            }
+            if (starred)
+                schart += "<tr><td align='center'  colspan='2'>* - has child entries in these charts.</td></tr>\n";
+
+                // get grandchildren
+            if (child_array.length > 0)
+                schart += "<tr><td align='center'  colspan='2'><font class='heading'>-- Grand Children --</font></td></tr>\n";
+            for (ifam = 0; ifam < child_array.length; ifam++)
+            {
+                fptr = child_array[ifam];
+                var carray = get_values_array(fptr.CHIL);
+                console.log("IFAM: %s fptr.id: %s carray length: %s", ifam, fptr.id, carray.length);
+                if (carray.length == 0)
+                    continue;
+
+                starred = false;
+                
+                for (ic = 0; ic < carray.length; ic++)
+                {
+                    cptr = get_person(carray[ic]);
+                    
+
+                    star = "";
+                    fams_array2 = get_values_array(cptr.FAMS); // array of one or more values
+                    for (ic2 = 0; ic2 < fams_array2.length; ic2++)
+                    {
+                        fptr2 = ged_objects[fams_array2[ic2]];
+                        if (fptr2.CHIL)
+                        {
+                            star = "*";
+                            starred = true;
+                        }
+                    }
+
+                    schart += "<tr><td align='center'>";
+        
+                    schart += sprintf("<a href='?id=%s'><font class='ancestor'>%s%s</font></td><td>%s</a>",
+                        cptr.id, cptr.full_name, star, get_short_full_dates(cptr));
+
+                    
+
+                    schart += "</td></tr>\n";
+
+                }
+
+            }
+        }
+
+        
+
+        // f1  f2
+
+        first_father_id = "";
+        first_mother_id = "";
+        second_father_id = "";
+        second_mother_id = "";
+
+        first_grandfather_id1 = "";
+        first_grandmother_id1 = "";
+        first_grandfather_id2 = "";
+        first_grandmother_id2 = "";
+        second_grandfather_id1 = "";
+        second_grandmother_id1 = "";
+        second_grandfather_id2 = "";
+        second_grandmother_id2 = "";
+
+        // m1  m2
+
+
+        first_father_id = get_father_id(first_id);
+        first_mother_id = get_mother_id(first_id);
+
+        second_father_id = get_father_id(spouse_id);
+        second_mother_id = get_mother_id(spouse_id);
+
+        //if (first_father_id)
+        {
+            first_grandfather_id1 = get_father_id(first_father_id);
+            first_grandmother_id1 = get_mother_id(first_father_id);
+        }
+        //if (first_father_id)
+        {
+            first_grandfather_id2 = get_father_id(first_mother_id);
+            first_grandmother_id2 = get_mother_id(first_mother_id);
+        }
+        //if (second_mother_id)
+        {
+            second_grandfather_id1 = get_father_id(second_father_id);
+            second_grandmother_id1 = get_mother_id(second_father_id);
+        }
+        //if (second_mother_id)
+        {
+            second_grandfather_id2 = get_father_id(second_mother_id);
+            second_grandmother_id2 = get_mother_id(second_mother_id);
+        }
+
+
+        schart += "<tr><td align='center'  colspan='2'><font class='heading'>-- Parents --</font></td></tr>\n";
+
+        schart += "<tr>\n";
+        schart += name_link(first_father_id);
+        if (sptr)
+        {
+            schart += name_link(second_father_id);
+            schart += "</tr>\n";
+
+            schart += "<tr>\n";
+        }
+        schart += name_link(first_mother_id);
+        if (sptr)
+            schart += name_link(second_mother_id);
+        schart += "</tr>\n";
+
+
+        schart += "<tr><td align='center'  colspan='2'><font class='heading'>-- Grand Parents --</font></td></tr>\n";
+
+        schart += "<tr>\n";
+        schart += name_link(first_grandfather_id1);
+        if (sptr)
+        {
+            schart += name_link(second_grandfather_id1);
+            schart += "</tr>\n";
+
+            schart += "<tr>\n";
+        }
+        schart += name_link(first_grandmother_id1);
+        if (sptr)
+            schart += name_link(second_grandmother_id1);
+        schart += "</tr>\n";
+
+        schart += "<tr>\n";
+        schart += name_link(first_grandfather_id2);
+        if (sptr)
+        {
+            schart += name_link(second_grandfather_id2);
+            schart += "</tr>\n";
+
+            schart += "<tr>\n";
+        }
+        schart += name_link(first_grandmother_id2);
+        if (sptr)
+            schart += name_link(second_grandmother_id2);
+        schart += "</tr>\n";
+        
+
+        
+
+
+        
+
+        schart += "</table>\n";
+        schart += "<br><br>\n";
+
+        //console.log("SCHART: %s", schart);
+
+        return (schart);
+    }
+
+
+   
+
+    
+    </script>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="./flatlab/js/jquery.js"></script>
+    <script src="./flatlab/js/bootstrap.bundle.min.js"></script>
+    <script class="include" type="text/javascript" src="./flatlab/js/jquery.dcjqaccordion.2.7.js"></script>
+    
+    <!-- for image gallery -->
+    <script src="./flatlab/assets/fancybox/source/jquery.fancybox.js"></script>
+    
+    
+    <script src="./flatlab/js/jquery.scrollTo.min.js"></script>
+    <script src="./flatlab/js/slidebars.min.js"></script>
+    <script src="./flatlab/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="./flatlab/js/respond.min.js" ></script>
+
+    <!--common script for all pages-->
+    <script src="./flatlab/js/common-scripts.js"></script>
+
+	<!-- for image gallery -->
+    <script src="./flatlab/js/modernizr.custom.js"></script>
+    <script src="./flatlab/js/toucheffects.js"></script>
+
+
+
+  </body>
+</html>

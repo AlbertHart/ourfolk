@@ -1,0 +1,86 @@
+<!doctype html>
+        <html>
+            <head>
+                <title>jQuery Tools standalone demo</title>
+
+                <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
+
+
+                <style>
+
+                    /* the overlayed element */
+                    .apple_overlay {
+
+                        /* initially overlay is hidden */
+                        display:none;
+
+                        /* growing background image */
+                        background-image:url(images/white.png);
+
+                        /*
+                          width after the growing animation finishes
+                          height is automatically calculated
+                        */
+                        width:640px;
+
+                        /* some padding to layout nested elements nicely  */
+                        padding:35px;
+
+                        /* a little styling */
+                        font-size:11px;
+                    }
+
+                    /* default close button positioned on upper right corner */
+                    .apple_overlay .close {
+                        background-image:url(images/close.png);
+                        position:absolute; right:5px; top:5px;
+                        cursor:pointer;
+                        height:35px;
+                        width:35px;
+                    }
+                </style>
+            </head>
+
+            <body>
+                <!-- external page is given in the href attribute (as it should be) -->
+                <a href="./ourfolk_additional/resources/douglass-trip-1876.htm" rel="#overlay" style="text-decoration:none">
+                    <!-- remember that you can use any element inside the trigger -->
+                    <button type="button">Show external page in overlay</button>
+                </a>
+
+                <!-- another link. uses the same overlay -->
+                <a href="resources/hart-at.htm" rel="#overlay" style="text-decoration:none">
+                    <button type="button">Show another page</button>
+                </a>
+
+                <!-- overlayed element -->
+                <div class="apple_overlay" id="overlay">
+                    <!-- the external content is loaded inside this tag -->
+                    <div class="contentWrap"></div>
+                </div>
+
+                <!-- make all links with the 'rel' attribute open overlays -->
+                <script>
+                    $(function() {
+
+                        // if the function argument is given to overlay,
+                        // it is assumed to be the onBeforeLoad event listener
+                        $("a[rel]").overlay({
+
+                            mask: 'darkred',
+                            effect: 'apple',
+
+                            onBeforeLoad: function() {
+
+                                // grab wrapper element inside content
+                                var wrap = this.getOverlay().find(".contentWrap");
+
+                                // load the page specified in the trigger
+                                wrap.load(this.getTrigger().attr("href"));
+                            }
+
+                        });
+                    });
+                </script>
+            </body>
+        </html>

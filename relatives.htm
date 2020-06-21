@@ -1,0 +1,994 @@
+<!doctype html>
+<html>
+  <head>
+      
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152244338-1"></script>
+    <script data-ad-client="ca-pub-0704525034147863" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-152244338-1');
+    </script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+
+    <title>Relatives</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./flatlab/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./flatlab/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="./flatlab/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    
+    <!-- for image gallery -->
+    <link href="./flatlab/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="./flatlab/css/gallery.css" />
+
+    <!-- Custom styles for this template -->
+    <link href="./flatlab/css/style.css" rel="stylesheet">
+    <link href="./flatlab/css/style-responsive.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="paf_styles.css"></link>
+
+            <script async src="https://cse.google.com/cse.js?cx=003736524176309227229:whsyk9ptpff"></script>
+            <script src="./alh_common/alh_sprintf.js?v=278"></script>
+            <script src="./alh_common/alh_common.js?v=278"></script>
+            <script src="hart-ged.js?v=278"></script>
+            <script src="ged_read.js?v=278"></script>
+            <script src="bk_data.js?v=278"></script>
+
+
+  </head>
+
+  <body class="boxed-page">
+      <div class="container">
+        <section id="container" class="">
+             <!--header start-->
+             <header class="header white-bg">
+                <div class="container">
+                    <div class="sidebar-toggle-box">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                    <!--logo start-->
+                    <a href="families.htm" class="logo">
+                        <img id=logo height='50'>
+                        <script>
+                            document.getElementById("logo").src = image_path + "/our-folk.jpg";
+                        </script>
+                    </a>
+                    <!--logo end-->
+                    <div class="nav notify-row" id="top_menu">
+                        <!--  notification start -->
+                        <div id=family_name class=title >Our Folk Genealogy Pages
+                           <br>(HartGen)</div>
+                            <!-- notification dropdown end -->
+                        </ul>
+                        <!--  notification end -->
+                    </div>
+                    <div class="top-nav ">
+                        <!--search & user info start-->
+                            <div class="gcse-search"></div>
+                       
+                        <!--search & user info end-->
+                    </div>
+                </div>
+            </header>
+            <!--header end-->
+
+            <!--sidebar start-->
+            <aside>
+                <div id="sidebar"  class="nav-collapse ">
+                    <script src="sidebar.js"></script>
+                </div>
+            </aside>
+            <!--sidebar end-->
+            
+            <!--main content start-->
+            <section id="main-content">
+              <section class=" wrapper">
+
+                <section class="card">
+                    <header class="card-header">
+                        
+                    </header>
+                    <div class="card-body">
+
+                        <div id=ged_out>
+                        
+                        </div>
+                </section>
+
+                <div id=output>OUTPUT</div>
+     
+              </section>
+
+              <!-- try footer here-->
+ 
+              <div class="text-center">
+                    <script>do_footer();</script>
+                <a href="#" class="go-top">
+                    <i class="fa fa-angle-up"></i>
+                </a>
+                </div>
+            </section>
+            <!--main content end-->
+
+      </section>
+      </div>
+      
+    <script>
+
+    var fptr;
+    var child_ptr;
+    var famptr;
+
+    var notes;
+
+    //var show_all = true;
+    //var single_record = "@I6@";
+
+    var ged_objects;
+
+    var id = get_url_var("id");    
+    if (id && id.substr(0,1) != "@")
+        id = "@I" + id + "@";
+    code1 = id;
+    var id2 = get_url_var("id2");    
+    if (id2 && id2.substr(0,1) != "@")
+        id2 = "@I" + id2 + "@";
+    code2 = id2;
+    
+    console.log("id: %s ID2: %s", id, id2);
+    
+    var sgallery;
+
+    var generation_titles = ["Ancestor Table", "Parents", "Grand Parents", "Great Grand Parents",
+        "4th Generation", "5th Generation", "6th Generatipn", "7th Generatipn", "8th Generatipn"];
+    var ancestors = [];
+    var generation = 0;
+
+    var ancestor_names = [];
+
+    var call_count = 0;
+
+    function bump_count()
+    {
+
+            call_count++;
+
+            //console.log(get_self(call_count));
+            if (call_count > 5000)
+                throw("COUNT ERROR");
+
+    }
+
+    ancestor_names[1] = ["", "Person", "Child", "Grandchild", 
+        "Great Grandchild",                 "Great Great Grandchild",
+        "3rd Great Grandchild",             "4th Great Grandchild",
+        "5th Great Grandchild",             "6th Great Grandchild"];
+
+    ancestor_names[2] = ["", "Father or Mother", "Brother or Sister",   "Nephew or Niece", 
+        "Grand Nephew or Niece",                "Great Grand Nephew or Niece",
+        "Great Great Grand Nephew or Niece",    "3X Grand Nephew or Niece", 
+        "4X Grand Nephew or Niece",             "5X Grand Nephew or Niece"];
+
+    ancestor_names[3] = ["", "Grandfather", "Aunt or Uncle",       "First Cousin", 
+        "First Cousin once removed",            "First Cousin twice removed",
+        "First Cousin 3X removed",              "First Cousin 4X removed",
+        "First Cousin 5X removed",              "First Cousin 6X removed"];
+        
+    ancestor_names[4] = ["", "Great Grandfather", "Great Aunt or Uncle", "First Cousin once removed",
+        "Second Cousin",                        "Second Cousin once removed",          
+         "Second Cousin twice removed",         "Second Cousin 3X removed",
+         "Second Cousin 4X removed",            "Second Cousin 5X removed"];
+
+    ancestor_names[5] = ["", "Great Great Grandfather", "Great Great Aunt or Uncle", "First Cousin twice removed",
+        "Second Cousin once removed",           "Third Cousin", 
+        "Third Cousin once removed",             "Third Cousin twice removed",
+        "Third Cousin 3X removed",             "Third Cousin 4X removed"];
+
+    ancestor_names[6] = ["", "3X Grandfather", "3X Aunt or Uncle", "First Cousin 3X removed",
+        "Second Cousin twice removed",           "Third Cousin once removed",
+        "Fourth Cousin",                         "Fourth Cousin once removed",
+        "Fourth Cousin twice removed",            "Fourth Cousin 3X removed"]; 
+
+    ancestor_names[7] = ["", "4X Grandfather", "4X Great Aunt or Uncle", "First Cousin 4x removed",
+        "Second Cousin 3x removed",           "Third Cousin twice removed",
+        "Fourth Cousin once removed",         "Fifth Cousin",
+        "Fifth Cousin once removed",          "Fifth Cousin twice removed"];
+
+    ancestor_names[8] = ["", "5X Grandfather", "5X Great Aunt or Uncle", "First Cousin 5x removed",
+        "Second Cousin 4x removed",           "Third Cousin 3X removed",
+        "Fourth Cousin twice removed",          "Fifth Cousin once removed",
+        "Sixth Cousin",                         "Sixth Cousin once removed"];
+
+    ancestor_names[9] = ["", "6X Grandfather", "6X Great Aunt or Uncle", "First Cousin 6X removed",
+        "Second Cousin 5x removed",           "Third Cousin 4X removed",
+        "Fourth Cousin 3X removed",             "Third Cousin twice removed",
+        "Sixth Cousin once removed",           "Seventh Cousin"];         
+
+
+    function get_relationship(iptr1, iptr2, gen1, gen2)
+    {
+        relationship = ancestor_names[gen1][gen2];
+
+        sex = iptr1.SEX;
+
+        //if (gen2 < gen1)
+        //    sex = iptr2.SEX;
+
+        
+        console.log("gen1: %s gen2: %s iptr1: %s SEX: %s , iptr2: %s SEX: %s sex: %s relationship: %s", gen1, gen2, 
+            iptr1.full_name, iptr1.SEX, iptr2.full_name, iptr2.SEX, sex, relationship);
+
+        if (sex == "F")
+        {
+            relationship = relationship.replace("Child", "Daughter")
+            relationship = relationship.replace("child", "daughter")
+            relationship = relationship.replace("Father or Mother", "Mother");
+            relationship = relationship.replace("father", "mother");
+            relationship = relationship.replace("Brother or Sister", "Sister");
+            relationship = relationship.replace("Nephew or Niece", "Niece");
+            relationship = relationship.replace("Aunt or Uncle", "Aunt");
+            console.log("SET to F: %s", relationship);
+        }
+        else if (sex == "M")
+        {
+            relationship = relationship.replace("Child", "Son")
+            relationship = relationship.replace("child", "son")
+            relationship = relationship.replace("Father or Mother", "Father");
+            relationship = relationship.replace("Brother or Sister", "Brother");
+            relationship = relationship.replace("Nephew or Niece", "Nephew");
+            relationship = relationship.replace("Aunt or Uncle", "Uncle");
+            console.log("SET to M: %s", relationship);
+        }
+        console.log("sex: %s NEW relationship: %s", sex, relationship);
+        return(relationship);
+
+    }
+
+
+    // how deep to go
+    var generations_to_show = 5;
+    var descendants_to_show = 5;
+
+    var main_ancestors = [];
+    var ancestors2 = [];
+    var main_generations = {};
+    var generations2 = {};
+
+    var count = 0;
+    var pcode;
+    var parent_code;
+    var top_ancestors = {};
+    var output_html = "";
+    var descendancy_path1 = [];
+    var descendancy_path2 = [];
+    var relatives_array = {};
+
+    var ancestors_processed = {};
+    var main_relatives = {};
+    var main_relatives_sort = {};
+
+    var descendency_html_array = {};
+
+    console.log("CALL read_ged_file");
+    read_ged_file();
+
+
+    main_person_record = get_person(code1);
+    get_ancestors(1, main_person_record);    // get main ancestors
+
+    shtml = sprintf("<div class='gen'>%s<br>%s</div><br>\n", main_person_record.full_name, get_short_full_dates(main_person_record));
+
+    simage = get_image(main_person_record, 100);
+
+    if (simage != "")
+    {
+        console.log("simage: %s", simage);
+        shtml += `<div style='text-align: center; width:25%; padding-bottom: 5px; padding-right: 5px; 
+            float: left; display: block;'>\n`;
+        shtml += simage;
+        shtml += "</div>" ;
+    }
+
+    shtml += show_dates(main_person_record);    
+
+    shtml += get_parents(main_person_record, false);
+
+    shtml += "<br clear=all><div class='gen' style='height: 20pt;'>Relatives</div><br>";
+
+    add_to_document("ged_out", shtml);
+
+
+   
+
+    if (id2 != "")
+    {
+        // if called with a specific pair
+        if (id2.substr(0,1) != "@")
+            id2 = "@I" + id2 + "@";
+        code2 = id2;
+        iptr2 = get_person(code2);
+
+
+        // fill ancestors array
+        console.log("CALL get_common_ancestor: %s %s", iptr2.code, iptr2.full_name);
+        get_common_ancestor(iptr2.code);
+    }
+    else
+    {
+        main_code = id;
+        if (!main_relatives[ancestor_code])
+        {
+            console.log("CALL for main_id get_descendant_relatives(%s, %s, %s)", main_code, 0, 0);
+            get_descendant_relatives(main_code, 0, 0);
+            console.log("AFTER MAIN CODE");
+
+        }
+
+        // get some relatives
+        console.log("GET RELATIVES by main_ancestors[generation]")
+        for (var generation = 0; generation < descendants_to_show; generation++) // < 4
+        {
+            for (var ancestor_code in main_ancestors[generation]) 
+            {
+                var ancestor_record = get_person(ancestor_code);
+                console.log("\n***** main_ancestors RELATIVE: %s ancestor_code: %s", ancestor_code, ancestor_record.full_name);
+                //console.log("CALL get_common_ancestor: %s %s", ancestor_record.code, ancestor_record.full_name);
+                //get_common_ancestor(ancestor_code);
+                if (!main_relatives[ancestor_code])
+                {
+                    console.log("CALL for main_ancestors get_descendant_relatives(%s, %s, %s)", ancestor_code, generation, 0);
+                    get_descendant_relatives(ancestor_code, generation, generation - 1);
+                }
+            }
+        }
+        console.log("AFTER RELATIVES");
+
+        // sort relatives
+        iout = 0;
+        keys = Object.keys(main_relatives_sort).sort();
+        for (ik = 0; ik < keys.length; ik++)
+        {
+            key = keys[ik];
+            code = main_relatives_sort[key].code;
+            if (code == main_code)
+                continue;
+            get_common_ancestor(code);
+            iout++;
+            //if (iout > 200)
+            //   break;
+        }
+        
+
+        
+    }
+
+
+
+    // gets called recursively
+    function get_descendant_relatives(parent_code, generation, seperation)
+    {
+        var ancestor_record = get_person(parent_code);
+        console.log(get_self(parent_code, generation, seperation, ancestor_record.full_name));
+
+        if (main_relatives[parent_code])
+        {
+            console.log("Already processed: %s %s", parent_code, ancestor_record.full_name);
+            return;
+        }
+        console.log("SET: main_relatives: %s %s", parent_code, ancestor_record.full_name);
+        main_relatives[parent_code] = {code: parent_code, generation: generation, seperation: seperation, name: ancestor_record.full_name};
+        
+        sort_key = sprintf("%03d%03d %s", seperation, Math.abs(generation) , parent_code);
+        main_relatives_sort[sort_key] = {code: parent_code, seperation: seperation, generation: generation, name: ancestor_record.full_name};
+
+        var fams_array = get_values_array(ancestor_record.FAMS); // array of one or more values
+
+        bump_count();
+        console.log("fams_array.length: %s", fams_array.length)
+        for (var ifam = 0; ifam < fams_array.length; ifam++)
+        {
+            var fams = fams_array[ifam];
+            var fptr = ged_objects[fams];
+            console.log("get_descendant_relatives: ifam: %s fptr %s HUSB: %s WIFE: %s", ifam, fptr.id, fptr.HUSB, fptr.WIFE);
+
+            if (fptr)
+            {
+                var carray = get_values_array(fptr.CHIL);
+                console.log("carray.length: %s", carray.length);
+                for (ic = 0; ic < carray.length; ic++)
+                {
+                    var child_code = carray[ic];
+                    //if (main_generations[child_code])
+                    //    continue; // direct ancestor
+                    var child_record = get_person(child_code);
+                    console.log("get_descendant_relatives: parent_code: %s ic: %s/%s ifam: %s child_code: %s %s ", 
+                        parent_code, ic, carray.length, ifam, child_code, child_record.full_name);
+
+                    if (child_record)
+                    {
+                        if (main_relatives[child_code])
+                            continue;
+                        if (Math.abs(seperation) < descendants_to_show)
+                        {                          
+                            console.log("CALL for descendant - get_descendant_relatives(%s, %s)", child_code, generation - 1, seperation + 1);   
+                            get_descendant_relatives(child_code, generation - 1, seperation + 1)
+                        }
+                        else
+                        {
+                            console.log("CHILD SKIPPED: %s %s generation: %s seperation: %s", 
+                                child_record.code, child_record.full_name, generation, seperation );
+                            //throw("SKIPPED");
+                        }
+                        
+                    }
+                }
+            }
+        }
+    }
+
+
+
+     function add_to_ancestors_array(person, parent_code, generation, type, ccode)
+    {
+        //console.log(get_self(person, parent_code, generation, type, ccode));
+        var parent_ptr = get_person(parent_code);
+        //console.log("person: %s parent_code: %s type: %s ccode: %s", person, parent_code, type, ccode);
+        //console.log("parent_code: %s %s", parent_code, parent_ptr.full_name);
+        //console.log("person: %s parent_code: %s %s type: %s ccode: %s", person, parent_code, parent_ptr.full_name, type, ccode);
+
+       var entry = {parent: parent_code, name: parent_ptr.full_name, type: type, ccode: ccode };
+
+        if (person == 2)
+        {
+            ancestors_array = ancestors2;
+            generations_array = generations2;
+        }
+        else
+        {
+            ancestors_array = main_ancestors;
+            generations_array = main_generations;
+        }
+
+        ancestors_array[generation][parent_code] = entry;
+        
+        if (!generations_array[parent_code])
+        {        
+            generations_array[parent_code] = {parent_code: parent_code, name: parent_ptr.full_name, PGen: null, Child: null};
+        }
+        if (generations_array[parent_code][person])
+        {
+            throw("individual entered twice");
+            return;
+        }
+
+        var generation_val = "G" + generation;// G1, 2
+
+        generations_record = generations_array[parent_code];
+        generations_record.PGen = generation_val;
+        generations_record.Child = ccode;
+
+        var bptr = get_person(ccode);   // child name
+        //console.log("ccode: %s generations_record.Child: %s", ccode, bptr.full_name, generations_record.Child);
+        //console.log("GENERATIONS: parent_code: %s %s person: %s generation: %s PGen: %s Child: %s",
+        //   parent_code,  parent_ptr.full_name, person, generation, generations_record.PGen1, generations_record.PChild1);
+
+    }
+
+
+
+    // call first for main person, then call again for each relative
+    function get_ancestors(person, person_record)
+    {
+        console.log("\n---- GET ANCESTORS ---");
+        console.log(get_self(person, person_record.code, person_record.full_name));
+
+        var ancestors_array;
+        var generations_array;
+        if (person == 2)
+        {
+            ancestors2 = [];
+            ancestors_array = ancestors2;
+            generations_array = generations2;
+        }
+        else
+        {
+            main_ancestors = [];
+            ancestors_array = main_ancestors;
+            generations_array = main_generations;
+            top_ancestors = {};
+        }
+
+        ancestors_array[0] = {};
+        ancestors_array[0][person_record.code] = {parent: person_record.code, type: "Person"};
+        generations_array[person_record.code] = {parent_code: person_record.code, name: person_record.full_name, PGen: "G0", Child: null};
+
+        for (var generation = 0; generation < generations_to_show; generation++)
+        {
+            console.log("generation: %s ancestors_array[%s].length: %s", 
+                generation, generation, ancestors_array[generation].length);
+            
+            if (ancestors_array[generation].length < 1)
+                break;
+
+            // array for next generation
+            ancestors_array[generation + 1] = {};
+            for (var key in ancestors_array[generation]) 
+            {
+    
+                var record = ancestors_array[generation][key];
+                var ccode = record.parent;// old parent - new child
+                var child_ptr = get_person(ccode);
+                //console.log("key: %s generation: %s new child ccode: %s %s", key, generation, ccode, child_ptr.full_name);
+
+                var famptr = ged_objects[child_ptr.FAMC];
+                if (person == 1 && (!famptr || (famptr.HUSB && !famptr.WIFE)))
+                {
+                    // no parents - mark as top ancestor
+                    top_ancestors[child_ptr.code] = {code: child_ptr.code, name: child_ptr.full_name, generation: generation};
+                }
+                if (famptr)
+                {
+                    // add if not already in array
+                    //console.log("generation: %s key: %s ccode: %s famc: %s HUSB: %s WIFE: %s", 
+                    //    generation, key, ccode, child_ptr.famc, famptr.HUSB, famptr.WIFE)
+                    if (famptr.HUSB)
+                    {
+                        var parent_code = famptr.HUSB;
+
+                        add_to_ancestors_array(person, parent_code, generation+1, "HUSB", ccode);
+                        
+                        if (person == 1)
+                        {
+                            // mark as top ancestor it we are at top level
+                            if (generation == generations_to_show - 1)
+                            {
+                                var parent_record = get_person(famptr.HUSB);
+                                top_ancestors[parent_record.code] = {code: parent_record.code, name: parent_record.full_name, generation: generation};
+                            }
+                        }
+                        if (person == 2)
+                        {
+                            if (main_generations[parent_code] && generations2[parent_code].PGen)
+                            {
+                                console.log("FOUND parent_code: %s %s generation: %s ", parent_code, get_person(parent_code).full_name, generation);
+                                console.log("CALL do_descendancy_path(%s)", parent_code);
+                                do_descendancy_path(parent_code, person_record.code);
+                                return; // stop when common ancestor found
+                            }
+                        }
+                    }
+                    
+                    if (famptr.WIFE)
+                    {
+                        var parent_code = famptr.WIFE;
+                        add_to_ancestors_array(person, parent_code, generation+1, "WIFE", ccode);
+
+                        if (person == 1)
+                        {
+                             // mark as top ancestor it we are at top level
+                             if (generation == generations_to_show - 1)
+                            {
+                                var parent_record = get_person(famptr.WIFE);
+                                top_ancestors[parent_record.code] = {code: parent_record.code, name: parent_record.full_name, generation: generation};
+                            }
+                        }
+                        if (person == 2)
+                        {
+                            if (main_generations[parent_code] && generations2[parent_code].PGen)
+                            {
+                                console.log("FOUND parent_code: %s %s generation: %s ", parent_code, get_person(parent_code).full_name, generation);
+                                do_descendancy_path(parent_code, person_record.code);
+                                return; // stop when common ancestor found
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        console.log("END get_ancestors: %s %s", person, person_record.code);
+
+    }
+
+    // common ancestor with main person
+    function get_common_ancestor(code)
+    {
+        // clear genrations 2
+        iptr2 = get_person(code);
+        console.log("");
+        console.log(get_self(iptr2.code));
+
+        if (ancestors_processed[iptr2.code])
+        {
+            console.log("ANCESTOR ALREADY PROCESSED: %s", iptr2.code);
+            return;
+        }
+        ancestors_processed[iptr2.code] = {code: iptr2.code, name: iptr2.full_name};
+        generations2 = {};
+
+        // first see if this is a direct ancestor
+        if (main_generations[iptr2.code])
+        {
+            do_descendancy_path(iptr2.code, null);
+            return;
+        }
+
+        get_ancestors(2, iptr2);
+        console.log("AFTER GET ANCESTORS(2)")
+        
+
+    }
+
+    // this should find the path from the common ancestor two people
+    function do_descendancy_path(ancestor_code, second_person_code)
+    {
+        console.log(get_self(ancestor_code, second_person_code));
+
+
+        var generation_count1 = 1;
+        var generation_count2 = 1;
+
+        descendancy_path1 = [];
+        descendancy_path2 = [];
+
+
+        var ancestor_record = get_person(ancestor_code);;
+        console.log("*** Common Ancestor PCODE: %s  %s", ancestor_code, ancestor_record.full_name);
+        bump_count();
+
+        var parent_name = ancestor_record.full_name; 
+        var parent_code = ancestor_record.code;
+
+        var pcode1 = main_generations[ancestor_code].Child;
+        //console.log("PCODE1: %s", pcode1);
+
+        var descendant_record1 = ancestor_record;
+        var descendant_record2 = ancestor_record;
+
+        descendency_html = "";
+
+        
+
+
+        // add all descendants to descendancy_path1
+        // stop at main_person
+        while (pcode1)
+        {
+            descendant_record1 = get_person(pcode1);
+            generation_count1++;
+            console.log("generation_count1: %s descendant_record1: %s", generation_count1, descendant_record1.full_name);
+            // get_relationship(iptr, iptr2, gen1, gen2)
+            var relationship_name = get_relationship(descendant_record1, ancestor_record, 1, generation_count1);
+            console.log("CHILD PCODE1: %s %s is the %s of %s", pcode1, descendant_record1.full_name, relationship_name, parent_name);
+            descendancy_path1.push({child_record: descendant_record1, relationship: relationship_name, 
+                parent_code: parent_code, parent_name: parent_name});
+            
+
+            if (pcode1 == main_person_record.code)
+            {
+                    //console.log("BREAK1: %s", pcode1);
+                    break;
+            }
+            
+            parent_code = descendant_record1.code;
+            parent_name = descendant_record1.full_name;
+             pcode1 = main_generations[pcode1].Child;
+            //console.log("NEW PCODE1: %s", pcode1);
+        }
+
+        parent_code = ancestor_record.code;
+        parent_name = ancestor_record.full_name;
+        //console.log("PARENT NAME: %s", parent_name);
+
+        //console.log("ancestor_code: %s generations2[ancestor_code]: %s", ancestor_code, generations2[ancestor_code]);
+
+        if (generations2[ancestor_code])
+        {
+
+            pcode2 = generations2[ancestor_code].Child;
+            while (pcode2)
+            {
+                descendant_record2 = get_person(pcode2);;
+                generation_count2++;
+                //console.log("generation_count2: %s descendant_record2: %s", generation_count2, descendant_record2.full_name);
+                relationship_name = get_relationship(descendant_record2, ancestor_record, 1, generation_count2);
+                //console.log("CHILD PCODE2: %s %s is the %s of %s", pcode2, descendant_record2.full_name, relationship_name, ancestor_record.full_name);
+                descendancy_path2.push({child_record: descendant_record2, relationship: relationship_name, 
+                    parent_code: parent_code, parent_name: parent_name});
+                
+                if (pcode2 == second_person_code)
+                {
+                    //console.log("BREAK2: %s", pcode2);
+                    break;
+                }
+                parent_code = descendant_record2.code;
+                parent_name = descendant_record2.full_name;
+                
+
+                pcode2 = generations2[pcode2].Child;
+                
+            }
+        }
+
+        //console.log("generation_count1: %s descendant_record1: %s", generation_count1, descendant_record1.full_name);
+        //console.log("generation_count2: %s descendant_record2: %s", generation_count2, descendant_record2.full_name);
+
+        srelationship1 = get_relationship(descendant_record1, descendant_record2, generation_count2, generation_count1);
+        srelationship2 = get_relationship(descendant_record2, descendant_record1, generation_count1, generation_count2);
+
+        if (srelationship1 == srelationship2)
+        {
+            srelationship = sprintf("<b>%s</b> and <b>%s</b> are %ss", descendant_record1.full_name, descendant_record2.full_name, srelationship1);
+            // Albert Douglass Hart, Jr and Madelyn Elyse Hart are First Cousin twice removeds
+            adverbs = ["once", "twice", "3X", "4X", "5X"];
+            //for (iw = 0; iw < adverbs.length; iw++)
+            //{
+                //word = adverbs[iw];
+                if (srelationship.indexOf("removeds") > 0)
+                {
+                    srelationship = srelationship.replace("Cousin", "Cousins");
+                    srelationship = srelationship.replace("removeds", "removed");
+                }
+            //}
+
+        }
+        else
+        {
+            srelationship = sprintf("<b>%s</b> is the %s of %s - %s %s", 
+                descendant_record1.full_name, srelationship1, get_name_and_years(descendant_record2.code), 
+                his_her(descendant_record1), srelationship2);
+        }
+
+        
+     
+
+        relatives_array[descendant_record2.code] = {code: descendant_record2.code, relationship: srelationship1,
+            generation_count1: generation_count1, generation_count2: generation_count2};
+       // ancestors_processed[descendant_record2.code] = {code: descendant_record2.code, name: descendant_record2.full_name, relationship: srelationship1};
+        
+        
+        console.log("*** RELATIVE: %s",srelationship);
+
+        simage = get_image(descendant_record2, 100);
+        shtml = "<hr><table border=0 width=95%><tr><td width=20% valign=top>";
+        shtml += simage;
+        shtml += "<br clear=all>\n";
+        shtml += sprintf(`<div id=IMG_%s></div></td><td valign=top>`, descendant_record2.code);
+        shtml += "</td><td  valign=top>";
+   
+        shtml += sprintf(`<a href="javascript:get_trace('%s');" > %s </a><br>`, descendant_record2.code, srelationship);
+
+        shtml += sprintf(`<br><button type='button' class='btn btn-info' 
+            onclick="get_trace('%s');">Show Relationship</button> </div>`,
+            descendant_record2.code);
+
+        shtml += sprintf(` <a href='ged_person.htm?id=%s' ><button type='button' class='btn btn-info'>Show %s's Family</button></a><br>`,
+            descendant_record2.id, descendant_record2.salutation);
+
+        //add_to_document("ged_out", shtml);
+
+        
+
+        shtml += sprintf(`<div id='REL_%s'>`, descendant_record2.code);
+        
+        
+        shtml += `<\div><br>\n`;
+        shtml += "</td></tr></table>";
+
+        add_to_document("ged_out", shtml);
+        console.log("");
+
+        
+
+
+        if (generations2[ancestor_code])
+        {
+            
+
+            
+
+            descendency_html += sprintf(`Their common ancestor is <b>%s</b>. %s<br>`, 
+                ancestor_record.full_name, show_dates(ancestor_record), 
+                ancestor_record.id, ancestor_record.salutation);
+
+            descendency_html += sprintf(`<a href='ged_person.htm?id=%s' ><button type='button' class='btn btn-info'>Show %s's Family</button></a><br>`,
+                ancestor_record.id, ancestor_record.salutation);
+
+                
+        }
+
+                
+        descendency_html += sprintf("%s %s", descendant_record2.full_name, show_dates(descendant_record2));
+
+        sindent = "&nbsp;&nbsp;";
+
+        parent_code = ancestor_record.code;
+        parent_name = ancestor_record.full_name;
+        for (var ii = descendancy_path1.length - 1; ii >= 0; ii--)
+        {
+            //  {name: "Albert Douglass Hart, Jr", relationship: "Great Grandson", ancestor: "Francis Eugene Bibbins, Sr"}
+            
+            descendant_object = descendancy_path1[ii];
+            //console.log("II: %s %s", ii, descendant_object.parent_name);
+            if (ii == descendancy_path1.length - 1)
+                descendency_html += sprintf("<br><br><b>%s</b> is the %s of %s", descendant_object.child_record.full_name,
+                    son_daughter(descendant_object.child_record), 
+                    get_name_and_years(descendant_object.parent_code));
+            else    
+                descendency_html += sprintf("<br>%s who is the %s of %s</li>", sindent, son_daughter(descendant_object.child_record), 
+                    get_name_and_years(descendant_object.parent_code));
+        }
+
+        console.log("generations2: ancestor_code: %s", ancestor_code);
+        if (generations2[ancestor_code])
+        {
+            console.log("");
+            for (var ii = descendancy_path2.length - 1; ii >= 0; ii--)
+            {
+                //  {name: "Albert Douglass Hart, Jr", relationship: "Great Grandson", ancestor: "Francis Eugene Bibbins, Sr"}
+
+                descendant_object = descendancy_path2[ii];
+                if (ii == descendancy_path2.length - 1)
+                    descendency_html += sprintf("<br><br><b>%s</b> is the %s of %s", descendant_object.child_record.full_name,
+                        son_daughter(descendant_object.child_record), 
+                        get_name_and_years(descendant_object.parent_code));
+                else    
+                    descendency_html += sprintf("<br>%s who is the %s of %s</li>", sindent, son_daughter(descendant_object.child_record), 
+                        get_name_and_years(descendant_object.parent_code));
+            }
+        }
+        
+        descendency_html_array[descendant_record2.code]  = {code: descendant_record2.code, ancestor_code: ancestor_code, html: descendency_html};
+        console.log("do_descendancy_path: %s return", ancestor_code);
+    }
+
+    function get_image(image_person, pct)
+    {
+        var simg_html = "";
+        if (image_person.OBJE)
+        {
+            var obje_array = get_values_array(image_person.OBJE); // array of one or more values
+
+            //console.log("OBJE length: %s", obje_array.length);
+
+            if (obje_array.length > 0)
+            {
+                
+                obje = obje_array[0];
+                console.log("obje.FILE: %s", obje.FILE);
+                if (obje.FILE)
+                {
+                    // FILE D:/Dropbox/_VP_Images/ourfolk/images/johnston/dorothy-johnston1930.jpg
+                    //image_file = obje.FILE;
+
+                    image_file = update_image_path(obje.FILE);
+
+                    //console.log("ii: %s image_file: %s", ii, image_file);
+
+                    simg_html = sprintf(`<figure class="image" style='float: left; width: 100%%;  padding:2px; ' >
+                        <img src='%s' style='width: %s%%;' />
+                        <figcaption>%s</figcaption>
+                    </figure>`, image_file, pct, image_person.full_name);
+
+
+
+
+                    //simg_html += sprintf("<h3>IMG</h3><img src='%s' style='xxfloat: left; width: 25%%; padding:2px; ' />", image_file);
+
+                }
+            }
+        }
+        return (simg_html);
+    }
+
+    function get_name_and_years(code)
+    {
+        record = get_person(code);
+        sret = sprintf(`<b>%s</b> - %s`, record.full_name, get_years_from_dates(record));
+        return(sret);
+    }
+
+    function get_trace(person_code)
+    {
+        person_record = get_person(person_code);
+        shtml = `<br><div style="margin-left: 10px; background-color: #e0e0e0;">`;
+
+        
+
+        descendency_record = descendency_html_array[person_code];
+        descendency_html = descendency_record.html;
+        ancestor_record = get_person(descendency_record.ancestor_code);
+
+
+         
+        
+
+        if (person_record.code != ancestor_record.code)
+        {
+            simage = get_image(ancestor_record, 100);
+
+            // put image in table on left
+            if (simage != "")
+            {
+                sid = "IMG_" + person_code;
+
+                console.log("simage: %s", simage);
+                //descendency_html += `<div style='text-align: center; width:12%; padding-bottom: 5px; padding-right: 5px; 
+                //    float: left; display: block;'>\n`;
+                //shtml += simage;
+                
+                set_document(sid, simage);
+            }
+            shtml += "<br clear=all>" ;
+            
+            
+        }
+
+        shtml += descendency_html;
+        //shtml += "</td></tr></table><br>";
+        shtml += "<br>";
+
+        sid = "REL_" + person_code;
+        set_document(sid, shtml);
+        
+    }
+
+    function add_to_document(sid, shtml)
+    {
+        elt = document.getElementById(sid);
+        if (!elt)
+            console.log("Cannot get sid: %s", sid);
+        elt.innerHTML += shtml + "\n";
+    }
+    function set_document(sid, shtml)
+    {
+        elt = document.getElementById(sid);
+        if (!elt)
+            console.log("Cannot get sid: %s", sid);
+        elt.innerHTML = shtml + "\n";
+    }
+
+ 
+
+    </script>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="./flatlab/js/jquery.js"></script>
+    <script src="./flatlab/js/bootstrap.bundle.min.js"></script>
+    <script class="include" type="text/javascript" src="./flatlab/js/jquery.dcjqaccordion.2.7.js"></script>
+    
+    <!-- for image gallery -->
+    <script src="./flatlab/assets/fancybox/source/jquery.fancybox.js"></script>
+
+    <script src="./flatlab/js/jquery.scrollTo.min.js"></script>
+    <script src="./flatlab/js/slidebars.min.js"></script>
+    <script src="./flatlab/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="./flatlab/js/respond.min.js" ></script>
+
+    <!--common script for all pages-->
+    <script src="./flatlab/js/common-scripts.js"></script>
+
+	<!-- for image gallery -->
+    <script src="./flatlab/js/modernizr.custom.js"></script>
+    <script src="./flatlab/js/toucheffects.js"></script>
+
+  <script type="text/javascript">
+  	// for image gallery
+      $(function() {
+        //    fancybox
+          jQuery(".fancybox").fancybox();
+      });
+
+  </script>
+
+  </body>
+</html>

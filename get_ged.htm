@@ -1,0 +1,432 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <title>GED Conversion</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./flatlab/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./flatlab/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="./flatlab/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+
+    <!-- Custom styles for this template -->
+    <link href="./flatlab/css/style.css" rel="stylesheet">
+    <link href="./flatlab/css/style-responsive.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="paf_styles.css"></link>
+
+    <script async src="https://cse.google.com/cse.js?cx=003736524176309227229:whsyk9ptpff"></script>
+    <script src="./alh_common/alh_sprintf.js?v=278"></script>
+    <script src="./alh_common/alh_common.js?v=278"></script>
+    <script src="hart-ged.js?v=278"></script>
+    <script src="ged_read.js?v=278"></script>
+    <script src="bk_data.js?v=278"></script>
+            
+    <script>
+        var image_path = "https://ourfolkgen.com/images";
+
+        if (document.location.href.startsWith("file:"))
+        {
+            image_path = "file:///Users/alhart/Dropbox/_VC_Production/images";
+            resoure_path = "file:///Users/alhart/Dropbox/_VC_Production/resources";
+            do_throw = true;
+        }
+
+    </script>
+
+  </head>
+
+  <style>
+      @media (min-width: 1500px) {
+        .container {
+            max-width: 1460px;
+        }
+        } 
+
+
+    </style>
+
+  <body class="boxed-page">
+      <div class="container">
+        <section id="container" class="">
+             <!--header start-->
+             <header class="header white-bg">
+                <div class="container">
+                    <div class="sidebar-toggle-box">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                    <!--logo start-->
+                    <a href="families.htm" class="logo">
+                        <img id=logo height='50'>
+                        <script>
+                            document.getElementById("logo").src = image_path + "/our-folk.jpg";
+                        </script>
+                    </a>
+                    <!--logo end-->
+                    <div class="nav notify-row" id="top_menu">
+                        <!--  notification start -->
+                    <style>
+                    .notify-row {
+                        float: left;
+                        margin-top: 15px;
+                        margin-left: 15px;
+                        width: 60%;
+                    }
+                        </style>
+                        
+                        <div  class=title >Our Folk Genealogy Pages (HartGen)</div>
+                            <!-- notification dropdown end -->
+                        </ul>
+                        <!--  notification end -->
+                    </div>
+    
+                    <div class="top-nav ">
+                        <!--search & user info start-->
+                            <div class="gcse-search"></div>
+     
+                        <!--search & user info end-->
+                    </div>
+                </div>
+            </header>
+            <!--header end-->
+
+            <!--sidebar start-->
+            <aside>
+                <div id="sidebar"  class="nav-collapse ">
+                    <script src="sidebar.js"></script>
+                </div>
+            </aside>
+            <!--sidebar end-->
+     
+      <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+          <!-- page start-->
+
+             
+          <h3>Please Select GED File:</h3>
+          <input type="file" id="txtfiletoread" accept=".ged" />
+
+          <br><br>
+          <h3>Last Lines</h3>
+          <div id=lines></div>
+          <br><br>
+          <div id = download_div style='display: none'>
+          
+            <a id="download_link" target="_blank" download="hart-ged.js"> Click here to Download hart-ged.js</a>
+          </div>
+  
+
+    <script>
+        console.log("get_ged.htm");
+
+    var fileSelected;
+    var fileTobeRead;
+    var fileExtension;
+    var fileReader;
+    var ged_file_contents;
+    var js_file_name = "hart-ged.js";
+    var js_file_contents = "";
+
+    var last_lines = ["","","", "","",""];
+
+    
+    window.onload = function () { 
+        console.log(get_self());
+            //Check the support for the File API support 
+            if (window.File && window.FileReader && window.FileList && window.Blob) {
+                fileSelected = document.getElementById('txtfiletoread');
+                fileSelected.addEventListener('change', function (e) { 
+        console.log(get_self());
+                    //Set the extension for the file 
+                    fileExtension = /.*.\.ged/; 
+                    //Get the file object 
+                    fileTobeRead = fileSelected.files[0];
+                    console.log("fileTobeRead: %s", fileSelected.files[0].name);
+                    console.log("fileTobeRead.name.match(fileExtension)): %s", fileTobeRead.name.match(fileExtension));
+                    //Check of the extension match 
+                    if (fileTobeRead.name.match(fileExtension)) { 
+                        //Initialize the FileReader object to read the 2file 
+                        fileReader = new FileReader(); 
+                        fileReader.onload = function (e) { 
+        console.log(get_self());
+                            ged_file_contents = fileReader.result; 
+                            ged_file_contents = ged_file_contents.replace(/\\/g, "/");
+                            console.log("ged_file_contents length: %d", ged_file_contents.length);
+
+                            ged_array = ged_file_contents.split("\n");
+
+                            name_out = false;
+                            date_out = false;
+
+
+                            snote = ""; // so we don't have to modify code
+                            for (ii = 0; ii < ged_array.length; ii++)
+                            {
+                                line = ged_array[ii];
+                                //console.log("%s %s", ii, line);
+
+                                
+
+                                /***
+                                    "0 @I1@ INDI
+                                    ", "1 NAME Albert Douglass /Hart/
+                                    ", "2 NSFX Jr
+                                    ", "1 TITL Jr
+                                    ", "1 SEX M
+                                    ", "1 BIRT
+                                    ", "2 DATE 16 APR 1947
+                                    ",
+                                ***/
+
+                                if (line.substr(0,4) == "0 @I")
+                                {
+                                    for (il = 5; il > 0; il--)
+                                        last_lines[il] = last_lines[il-1];
+                                    last_lines[0] = "<br>" + line;
+                                    name_out = false;
+                                    date_out = false;
+                                }
+                                if (!name_out && line.substr(0,6) == "1 NAME")
+                                {
+                                    name_out = true;
+                                    last_lines[0] += line.substr(6);
+                                }
+                                if (!date_out && line.substr(0,6) == "2 DATE")
+                                {
+                                    date_out = true;
+                                    last_lines[0] += line.substr(6);
+                                }
+
+                                continue;
+
+
+                                ipos = line.indexOf("#document");
+                                //console.log("%s: %s", ipos, line);
+                                if (ipos >= 0)
+                                {
+                                    note = line.substr(ipos);
+                                    console.log("NOTE: %s", note);
+                                    style = "";
+                                    pct = "100%";
+
+                                    spct = note.substr(9,3);
+                                    if (spct.substr(0,1) == "_")
+                                        pct = spct.substr(1,2) + "%";
+                                    
+                                    ipos1 = note.indexOf(" ");
+                                    ipos2 = note.indexOf(" ", ipos1+1);
+                                    if (ipos2 >= 0)
+                                    {
+                                        item = note.substr(ipos1+1, ipos2 - ipos1 - 1); // ADH - change elsewhere
+                                        description = note.substr(ipos2 + 1);
+                                    }
+                                    else
+                                    {
+                                        item = note.substr(ipos1+1);
+                                        description = "";
+                                    }
+                                    item = item.trim();
+
+                                    
+
+                                    item_lower = item.toLowerCase();
+                                    if (item_lower.indexOf(".htm") >= 0)
+                                    {
+                                        if (item_lower.substr(0,4) != "http" && item_lower.substr(0,2) != "..")
+                                            item = resource_path + "/" + item;
+                                        snotes += sprintf("<ol><a href='%s'>%s</a></ol>\n", item, description);
+
+                                        snotes += sprintf("<br><a href='%s'>%s</a><br>", item, item);
+                                    }
+                                    else if (item_lower.indexOf(".jpg") >= 0 || item_lower.indexOf(".png") >= 0)
+                                    {
+                                        if (item_lower.substr(0,4) != "http" && item_lower.substr(0,2) != "..")
+                                        {
+                                            if (item_lower.indexOf("/") >= 0)
+                                                item = image_path + "/" + item;
+                                            else
+                                                item = resource_path + "/" + item;
+                                                console.log("CHECK IMAGE: %s", item);
+                                                $.ajax({
+                                                    url: item,
+                                                    type:'get',
+                                                    async: false,
+                                                    error:function(response){
+                                                        console.log("Image not found; %s", item);
+                                                        
+                                                        }
+                                                    });
+
+
+                                                /***
+
+                                            // see if item exists
+                                            $.get(item)
+                                                .done(function()
+                                                {
+                                                    console.log("Image exists; %s", item);
+                                                })
+                                                .fail(function()
+                                                {
+                                                    console.log("Image not found; %s", item);
+                                                })
+                                                ***/
+                                            break;  
+                                        }
+
+                                        
+                    
+                                    }
+                                    
+                                    continue;
+                                }
+                            }
+
+                            elt = document.getElementById("lines");
+                            elt.innerHTML = last_lines.join("\n");
+
+                            //var fileContents = document.getElementById('filecontents'); 
+                            //fileContents.innerText = ged_file_contents; 
+
+                            // create .js file
+                            js_file_contents = `console.log("IN hart-ged.js");\n`;
+                            js_file_contents += "var ged_source = `\n";
+                            js_file_contents += ged_file_contents;
+                            js_file_contents += "\n`;\n";
+                            js_file_contents += sprintf("console.log(\"%s length: %s\", ged_source.length);\n", js_file_name);
+
+                            console.log("hart-ged.js length: undefined", ged_source.length);
+                            console.log("AFTER Set ged_source do_process_ged_file: %s", do_process_ged_file);
+                            js_file_contents += `var do_process_ged_file;
+if (do_process_ged_file)
+{
+    console.log("CALLING process_ged_file");
+    process_ged_file();
+}\n`;
+
+                            console.log("js_file_contents length: %d", js_file_contents.length);
+
+                            //var ged_js_elt = document.getElementById("ged_js_text");
+                            //ged_js_elt.innerText = js_file_contents;
+
+                            make_blob();
+                        } 
+                        fileReader.readAsText(fileTobeRead); 
+                    } 
+                    else { 
+                        alert("Please select ged file"); 
+                    }
+            
+                }, false);
+            } 
+            else { 
+                alert("Files are not supported"); 
+            } 
+            }
+
+
+            var file;
+            var data
+
+        /***
+    var data = [];
+    data.push("This is a test\n");
+    data.push("Of creating a file\n");
+    data.push("In a browser\n");
+    string = "";
+    for (ii = 0; ii < 300000; ii++)
+    {
+        data.push("New line: " + ii + "aaa bbb ccc ddd eee fff ggg hhh iii jjj kkk lll mmm nnn\n");
+        string += "New line: " + ii + "aaa bbb ccc ddd eee fff ggg hhh iii jjj kkk lll mmm nnn\n";
+    }
+     
+        //data = string.split("\n"); // works ok
+        ***/
+
+
+    function make_blob()
+    {
+        console.log(get_self());
+        var properties = {type: 'text/plain'}; // Specify the file's mime-type.
+
+
+        data = [js_file_contents];
+        console.log("string DATA length: %s", data.length);
+
+        try 
+        {
+            // Specify the filename using the File constructor, but ...
+            console.log("SAVE AS FILE");
+            file = new File(data, "ged_file.js", properties);
+        } 
+        catch (e) 
+        {
+            // ... fall back to the Blob constructor if that isn't supported.
+            console.log("SAVE AS BLOB");
+            file = new Blob(data, properties);
+        }
+        console.log("After create FILE");
+        var url = URL.createObjectURL(file);
+        download_div_elt = document.getElementById('download_div');
+        download_div_elt.style.display = "block";
+        download_elt = document.getElementById('download_link');
+        download_elt.href = url;
+        console.log("After set download_link href");
+    }
+
+
+       
+    </script>
+
+
+
+          <!-- page end-->
+          </section>
+      </section>
+      <!--main content end-->
+
+     
+
+  </section>
+  
+  
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="./flatlab/js/jquery.js"></script>
+    <script src="./flatlab/js/bootstrap.bundle.min.js"></script>
+    <script class="include" type="text/javascript" src="./flatlab/js/jquery.dcjqaccordion.2.7.js"></script>
+    
+    <!-- for image gallery -->
+    <script src="./flatlab/assets/fancybox/source/jquery.fancybox.js"></script>
+    
+    
+    <script src="./flatlab/js/jquery.scrollTo.min.js"></script>
+    <script src="./flatlab/js/slidebars.min.js"></script>
+    <script src="./flatlab/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="./flatlab/js/respond.min.js" ></script>
+
+    <!--common script for all pages-->
+    <script src="./flatlab/js/common-scripts.js"></script>
+
+	<!-- for image gallery -->
+    <script src="./flatlab/js/modernizr.custom.js"></script>
+    <script src="./flatlab/js/toucheffects.js"></script>
+
+  <script type="text/javascript">
+  	// for image gallery
+      $(function() {
+        //    fancybox
+          jQuery(".fancybox").fancybox();
+      });
+
+  </script>
+
+
+  </body>
+</html>

@@ -1,0 +1,440 @@
+<!doctype html>
+<html>
+  <head>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152244338-1"></script>
+  <script data-ad-client="ca-pub-0704525034147863" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-152244338-1');
+  </script>
+  
+  
+
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    
+
+    <title>Mayflower Passengers</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./flatlab/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./flatlab/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="./flatlab/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    
+
+    <!-- Custom styles for this template -->
+    <link href="./flatlab/css/style.css" rel="stylesheet">
+    <link href="./flatlab/css/style-responsive.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="paf_styles.css"></link>
+
+
+            <script async src="https://cse.google.com/cse.js?cx=003736524176309227229:whsyk9ptpff"></script>
+            <script src="./alh_common/alh_sprintf.js?v=278"></script>
+            <script src="./alh_common/alh_common.js?v=278"></script>
+            <script src="hart-ged.js?v=278"></script>
+            <script src="ged_read.js?v=278"></script>
+            <script src="bk_data.js?v=278"></script>
+
+
+
+  </head>
+
+  <body class="boxed-page">
+      <div class="container">
+        <section id="container" class="">
+            <!--header start-->
+            <header class="header white-bg">
+                <div class="container">
+                    <div class="sidebar-toggle-box">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                    <!--logo start-->
+                    <a href="families.htm" class="logo">
+                        <img id=logo height='50'>
+                        <script>
+                            document.getElementById("logo").src = image_path + "/our-folk.jpg";
+                        </script>
+                    </a>
+                    <!--logo end-->
+                    <div class="nav notify-row" id="top_menu">
+                        <!--  notification start -->
+                        <div id=family_name class=title >Our Folk Genealogy Pages
+                           <br>(HartGen)</div>
+                            <!-- notification dropdown end -->
+                        </ul>
+                        <!--  notification end -->
+                    </div>
+                    <div class="top-nav ">
+                        <!--search & user info start-->
+                            <div class="gcse-search"></div>
+                       
+                        <!--search & user info end-->
+                    </div>
+                </div>
+            </header>
+            <!--header end-->
+
+            <!--sidebar start-->
+            <aside>
+                <div id="sidebar"  class="nav-collapse ">
+                    <script src="sidebar.js"></script>
+                </div>
+            </aside>
+            <!--sidebar end-->
+            
+            <!--main content start-->
+            <section id="main-content">
+              <section class=" wrapper">
+
+            <style>
+                .name {
+                    width:527.7pt;
+                    background-color:#D0D0D0;
+                    margin: 2pt;
+                    padding:1pt 1pt 1pt 1pt;
+                    font-size:16pt;
+                }
+
+                .left_icon {
+                    float: left;    
+                    margin: 0 15px 0 0;
+                }
+
+                .small_div {
+                    xxwidth: 30vw;
+                    xxheight: 30vw;
+                    xxpadding: 5px;
+                    xxborder: 1px;
+                    xxbackground-color: #e0e0e0;
+                }
+
+                .fit_small  {
+                    object-fit: cover;
+                    width: 30vw;
+                    height: 25vw;
+                }
+                .fit_large  {
+                    object-fit: cover;
+                    width: 60vw;
+                    height: 50vw;
+                }
+
+            </style>
+
+<h4>Mayflower Passengers</h4>
+Click on any image to enlarge it.
+<br><br>
+Click on the names to read more about the family that traveled on the Mayflower.
+<br><br>
+
+
+<table class=MsoNormalTable border=0 cellpadding=0 style='mso-cellspacing:1.5pt;
+ background-color:#E0E0E0;mso-padding-alt:0in 0in 0in 0in'>
+
+
+</table>
+
+<p class=MsoNormal style='margin:0in;margin-bottom:.0001pt'><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext'><o:p> </o:p> </p>
+
+<table class=MsoNormalTable border=0 cellpadding=0 width=711 style='width:533.2pt;
+ mso-cellspacing:1.5pt;mso-padding-alt:0in 0in 0in 0in'>
+
+ <script>
+
+
+    read_ged_file();
+ 
+    var mayflowers = [];
+
+   
+
+    var keys = Object.keys(ged_objects);
+    for (var ik = 0; ik < keys.length; ik++)
+    {
+        key = keys[ik];
+        //console.log("ik: %s %s", ik, key);
+        if (key.substr(0,2) == "@F")
+            break;
+        if (key.substr(0,2) != "@I")
+            continue;
+        iptr = get_person(key);
+        
+        if (iptr.OBJE)
+        {
+            var obje_array = get_values_array(iptr.OBJE); // array of one or more values
+
+            for (var ii = 0; ii < obje_array.length; ii++)
+            {
+
+
+                obje = obje_array[ii];
+
+        
+
+                if (obje.FILE)
+                {
+        
+                    // FILE D:/Dropbox/_VP_Images/ourfolk/images/johnston/dorothy-johnston1930.jpg
+                    image_file = update_image_path(obje.FILE);
+                    title = "";
+                    if (obje.TITL)
+                    {
+                        title = obje.TITL;
+                    }
+                    file_lower = obje.FILE.toLowerCase();
+                    if (title.indexOf("Mayflower Passenger") >= 0 )
+                    {
+                        mayflower_entry = {key: iptr.code, title: obje.TITL, file: image_file};
+                        mayflowers.push(mayflower_entry);
+                    }
+                }
+            }
+                        
+
+        }
+        if (iptr.NOTE)
+        {
+        }
+        continue;
+
+       
+        
+        
+
+  
+
+        cont_array = get_values_array(notes.CONT); // array of one or more values
+        for (var ii = 0; ii < cont_array.length; ii++)
+        {
+
+            note = cont_array[ii].trim();
+            if (!note.start_with("#document")  &&
+                !note.start_with("#mayflower "))
+                continue;
+            //console.log("%s", note);
+            ipos1 = note.indexOf(" ");
+            ipos2 = note.indexOf(" ", ipos1+1);
+            if (ipos1 < 0 || ipos2 < 0)
+            {
+                console.log("BAD #mayflower format: %s", note);
+            }
+            family = iptr.last_name;
+            family = family.replace("'", "&apos;");
+            item = note.substr(ipos1+1, ipos2 - ipos1);
+            description = note.substr(ipos2 + 1);
+            //console.log("ik: %s key: %s family: %s item: %s description: %s", ik, key, family, item, description);
+            
+            object = {family: family,
+                key: iptr.code,
+                item: item, 
+                description: description};
+            mayflowers.push(object);
+
+        }
+
+
+        
+    }
+
+
+    mayflowers.sort(compare_mayflower_entry);
+
+    last_family = "";
+    rcount = 0;
+
+    mayflowers.forEach(function (mayflower) {
+        family = mayflower.family;
+        file = mayflower.file;
+        description = mayflower.title;
+        mayflower.no = rcount;
+        rcount++;
+        no = mayflower.no;
+ 
+
+        //console.log("%s %s %s", family, description, file);
+ 
+        if (false && last_family != family)
+        {
+            if (last_family != "")
+                document.writeln(sprintf("</div> <!-- %s -->\n", last_family));
+            
+            last_family = family;
+
+            document.writeln(sprintf("<p class=name><a href='javascript:toggle_family(\"%s\");'>", family));
+            document.writeln(sprintf("<img id=icon_%s src='%s/show_icon.png' width=30 />\n", family, image_path));
+            document.writeln(sprintf("%s Family</a></p>", family));
+            document.writeln("<br><br>");
+            document.writeln(sprintf("<div id='show_%s' style='display:block;'>\n", family));
+        }
+
+        iptr = get_person(mayflower.key);
+        
+        document.writeln(sprintf("<br>mayflower for: %s %s<br>\n", 
+            output_fullname(iptr,"LINK_MARRIAGE","NO_ANCHOR","name","NO_SPACE", "NO_INDEX"),
+            get_short_full_dates(iptr)));
+                    
+
+        
+    
+            src = mayflower.file;
+      
+            mayflower.src = src;
+            document.writeln("<br><span>");
+            document.writeln(sprintf("<img id=enlarge_%s class=left_icon src='%s/enlarge_icon.png' width=30 onclick='toggle_image(%s);' />\n", no, image_path, no));
+            document.writeln(sprintf("<div class=heading>%s</div>\n", description));
+            document.writeln("<div class=small_div >")
+            //document.writeln(sprintf("<img id=image_%s class=fit  src='%s' style='max-width: 33%%; width:80%%; onclick='toggle_image(%s);'/><br>\n", no, mayflower.src, no));
+            document.writeln(sprintf("<img id=image_%s class=fit_small  src='%s' onclick='toggle_image(%s);'/><br>\n", no, mayflower.src, no));
+            document.writeln("</div>\n");
+            document.writeln("</span><br>\n");
+      
+        
+
+    })
+
+    if (last_family != "")
+        document.writeln(sprintf("</div> <!-- %s -->\n", last_family));
+
+
+    function toggle_family(family)
+    {
+        id1 = "show_" + family;
+        elt1 = document.getElementById(id1);
+        id2 = "icon_" + family;
+        elt2 = document.getElementById(id2);
+        
+
+        // load images
+        mayflowers.forEach(function (mayflower) {
+            if (mayflower.family == family)
+            {
+                no = mayflower.no;
+                load_image(no);
+            }
+
+        })
+
+        if (elt1.style.display == "block")
+        {
+            elt1.style.display = "none";
+            elt2.src=image_path + '/show_icon.png'
+        }
+        else
+        {
+            elt1.style.display = "block";
+            elt2.src = image_path + '/hide_icon.png'
+        }
+    }
+
+
+    function load_image(no)
+    {
+        console.log(get_self(no));
+        id = "image_" + no;
+        elt = document.getElementById(id);
+        if (!elt)
+            return; // not an image
+        if (!elt.src)
+            elt.src = mayflowers[no].src;
+        elt.style["max-width"] = "25%";
+    }
+    function toggle_image(no)
+    {
+        console.log(get_self(no));
+        id = "image_" + no;
+        elt = document.getElementById(id);
+        id2 = "enlarge_" + no;
+        elt2 = document.getElementById(id2);
+
+        if (elt.className == "fit_large")
+        {
+            elt.className = "fit_small";
+            elt2.src = image_path + "/enlarge_icon.png";
+        }
+        else 
+        {
+            elt.className = "fit_large";
+            elt2.src = image_path + "/shrink_icon.png";
+        }
+
+    }
+
+    function compare_mayflower_entry(a, b) {
+        // Use toUpperCase() to ignore character casing
+        var titleA = a.title.toUpperCase();
+        var titleB = b.title.toUpperCase();
+
+
+        if (titleA > titleB) {
+            return 1;
+        } else if (titleA < titleB) {
+            return -1;
+        }
+
+        /*** 
+        var descriptionA = a.description.toUpperCase();
+        var descriptionB = b.description.toUpperCase();
+
+
+        if (descriptionA > descriptionB) {
+            return 1;
+        } else if (descriptionA < descriptionB) {
+            return -1;
+        }
+        ***/
+
+        return 0;
+    }
+
+
+
+</script>
+
+</section>
+
+
+
+            </section>
+            <!--main content end-->
+            
+
+            <!--footer start-->
+            <footer class="site-footer">
+            <div class="text-center">
+              <script>do_footer();</script>
+            <a href="#" class="go-top">
+                <i class="fa fa-angle-up"></i>
+            
+            </div>
+            </footer>
+            <!--footer end-->
+      </section>
+      </div>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="./flatlab/js/jquery.js"></script>
+    <script src="./flatlab/js/bootstrap.bundle.min.js"></script>
+    <script class="include" type="text/javascript" src="./flatlab/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="./flatlab/js/jquery.scrollTo.min.js"></script>
+    <script src="./flatlab/js/slidebars.min.js"></script>
+    <script src="./flatlab/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="./flatlab/js/respond.min.js" ></script>
+
+    <!--common script for all pages-->
+    <script src="./flatlab/js/common-scripts.js"></script>
+
+
+  </body>
+</html>

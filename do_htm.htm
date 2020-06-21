@@ -1,0 +1,379 @@
+<!doctype html>
+<html>
+  <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152244338-1"></script>
+    <script data-ad-client="ca-pub-0704525034147863" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-152244338-1');
+    </script>
+    
+    
+
+
+    
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    
+
+    <title>DO HTM</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./flatlab/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./flatlab/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="./flatlab/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    
+    <!-- for image gallery -->
+    <link href="./flatlab/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="./flatlab/css/gallery.css" />
+    
+  
+    <!-- Custom styles for this template -->
+    <link href="./flatlab/css/style.css" rel="stylesheet">
+    <link href="./flatlab/css/style-responsive.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="paf_styles.css"></link>
+
+
+            <script async src="https://cse.google.com/cse.js?cx=003736524176309227229:whsyk9ptpff"></script>
+            <script src="./alh_common/alh_sprintf.js?v=278"></script>
+            <script src="./alh_common/alh_common.js?v=278"></script>
+            <script src="hart-ged.js?v=278"></script>
+            <script src="ged_read.js?v=278"></script>
+            <script src="bk_data.js?v=278"></script>
+
+ 
+
+  </head>
+
+  <body class="boxed-page">
+      <div class="container">
+        <section id="container" class="">
+             <!--header start-->
+             <header class="header white-bg">
+                <div class="container">
+                    <div class="sidebar-toggle-box">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                    <!--logo start-->
+                    <a href="families.htm" class="logo">
+                        <img id=logo height='50'>
+                        <script>
+                            document.getElementById("logo").src = image_path + "/our-folk.jpg";
+                        </script>
+                    </a>
+                    <!--logo end-->
+                    <div class="nav notify-row" id="top_menu">
+                        <!--  notification start -->
+                        <div id=family_name class=title >Our Folk Genealogy Pages
+                           <br>(HartGen)</div>
+                            <!-- notification dropdown end -->
+                        </ul>
+                        <!--  notification end -->
+                    </div>
+                    <div class="top-nav ">
+                        <!--search & user info start-->
+                            <div class="gcse-search"></div>
+                       
+                        <!--search & user info end-->
+                    </div>
+                </div>
+            </header>
+            <!--header end-->
+
+            <!--sidebar start-->
+            <aside>
+                <div id="sidebar"  class="nav-collapse ">
+                    <script src="sidebar.js"></script>
+                </div>
+            </aside>
+            <!--sidebar end-->
+            
+            <!--main content start-->
+            <section id="main-content">
+              <section class=" wrapper">
+
+                <section class="card">
+                    <header class="card-header">
+                        
+                    </header>
+                    <div class="card-body">
+                        
+
+                        <div id=ged_out>
+                        
+                    </div>
+                </section>
+     
+              </section>
+
+              <!-- try footer here-->
+ 
+              <div class="text-center">
+                    <script>do_footer();</script>
+                <a href="#" class="go-top">
+                    <i class="fa fa-angle-up"></i>
+                </a>
+                </div>
+            </section>
+            <!--main content end-->
+            
+
+
+      </section>
+      </div>
+      
+      <script>
+
+    var iptr;
+    var fptr;
+    var cptr;
+    var fptr;
+
+    var notes;
+
+    //var show_all = true;
+    //var single_record = "@I6@";
+
+    
+    var ged_objects;
+
+    
+
+    
+
+
+    var sgallery;
+
+    var generation_titles = ["Descendants Table", "Children", "Grand Children", "Great Grand Children",
+        "4th Generation", "5th Generation", "6th Generatipn", "7th Generatipn", "8th Generatipn"];
+    var descendants = [];
+    var generation = 0;
+
+    var generations_to_show = 4;
+
+    read_ged_file();
+
+    var id = "";
+    var family_key = "";
+    var family = "";
+    var family2 = "";
+    var ipos1;
+    var ipos2;
+
+    // https://ourfolkgen.com/ourfolk/do_htm.htm?orig=hart.htm
+    orig = get_url_var("orig");
+    if (orig && orig != "")
+    {
+        ipos = orig.indexOf(".");
+        if (ipos >= 0)
+        {
+            family = orig.substr(0, ipos);  
+            family = family.replace(/-/g, " ");
+            console.log("orig family: %s", family);
+        }
+    }
+
+   
+    if (family != "")
+    {
+        
+        
+ 
+
+        console.log("FAMILY: %s family2: %s ipos1: %s ipos2: %s", family, family2);
+
+        if (family2 == "")
+        {
+            // for known families, just go there
+            if (family == "hart")
+                id = 98;
+            else if (family == "kimball")
+                id = 439;
+            else if (family == "bibbins")
+                id = 443;
+            else if (family == "johnston")
+                id = 468;
+            else if (family == "adams")
+                id = 427;
+            else if (family == "smith")
+                id = 2390;
+            else if (family == "erikson")
+                id = 440;
+            else if (family == "erikson")
+                id = 440;
+            console.log("ID: %s family: %s", id, family, ipos1, ipos2);
+        }
+        
+
+        // loop through to find this family pair
+       if (id == "")
+       {
+            var keys = Object.keys(ged_objects);
+            //console.log("KEYS.length: %s", keys.length);
+
+            for (var ik = 0; ik < keys.length; ik++)
+            {
+                key = keys[ik];
+                //console.log("ik: %s %s", ik, key);
+                if (key.substr(0,2) == "@F")
+                    break;
+                if (key.substr(0,2) != "@I")
+                    continue;
+                iptr = get_person(key);
+                
+                //console.log("IPTR: %s last_name: %s (family: %s)", iptr.id, iptr.last_name.toLowerCase(), family.toLowerCase());
+
+                if (iptr.last_name.toLowerCase() == family.toLowerCase())
+                {
+                    console.log("IPTR: %s %s FAMILY: %s", iptr.id, iptr.full_name, family);
+                    var fams_array = get_values_array(iptr.FAMS); // array of one or more values
+                    if (family_key == "")
+                        family_key = key;
+
+                    if (family2 == "")
+                        continue;
+                    for (var ifam = 0; ifam < fams_array.length; ifam++)
+                    {
+                        fams = fams_array[ifam];
+
+                        fptr = ged_objects[fams];
+                        if (!fptr)
+                        {
+                            console.log("FAMILY NOT FOUND: %s", fams);
+                            continue;
+                        }
+
+                        // find spouse with family2 name
+                        var spouse_record = get_spouse_record(iptr, fptr);
+                        if (spouse_record)
+                        {
+                            console.log("spouse_record: %s last_name: %s family2 %s", spouse_record.id, spouse_record.last_name, family2.toLowerCase());
+                            if (spouse_record.last_name.toLowerCase() == family2.toLowerCase())
+                            {     
+                                console.log("FAMILY2 FOUND: spouse_record: %s %s", spouse_record.id, spouse_record.full_name);  
+                                id = iptr.id;
+                                break;
+                            }
+                        }
+
+                    }
+                    console.log("ID: %s family_key: %s", id, family_key);
+
+                }
+                if (id != "")
+                    break;    
+            }
+            console.log("At end of family 2 search: ID: %s family_key: %s", id, family_key);
+            if (id == "")
+            {
+                if (family_key != "")
+                {
+                    key = family_key;
+
+                    iptr = get_person(key);
+                    
+                    console.log("FAMILY_KEY: %s IPTR: %s %s (%s", iptr.id, iptr.last_name.toLowerCase(), family_key, family.toLowerCase());
+
+                    
+                    
+                    if (iptr.last_name.toLowerCase() == family.toLowerCase())
+                    {
+                        // get top ancestor
+                        //console.log("IPTR: %s %s FAMILY: %s", iptr.id, iptr.full_name, family);
+                        while (iptr.FAMC)
+                        {
+                            pptr = ged_objects[iptr.FAMC];
+                            console.log("pptr: %s HUSB: %s", pptr.code, pptr.HUSB);
+                            if (pptr && pptr.HUSB)
+                                iptr = get_person(pptr.HUSB);
+                            else
+                                break;
+                        }
+                        id = iptr.code;
+                        console.log("TOP: ID: %s %s", id, iptr.full_name);
+
+                    }
+                }
+            }
+
+       }
+
+       //console.log("ID: %s", id);
+    }
+
+    //console.log("ID: %s", id);
+    if (id == "")
+    {
+        id = get_url_var("id");
+    }
+
+    if (id != "" && String(id).substr(0,1) != "@")
+       id = "@I" + id + "@";
+
+
+    console.log("GET DESCANDANTS: ID: %s", id);
+
+    if (!id)
+        throw("ID not found");
+
+    if (id != "")
+        load_descendants_from_id(id);
+
+    function load_descendants_from_id(id)
+    {
+        surl = sprintf("descendants.htm?id=%s", id);
+        console.log("SURL: %s", surl);
+        window.location.href = surl;
+        return(false);
+    }
+
+    //do_descendants(id);
+
+    
+
+    
+    </script>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="./flatlab/js/jquery.js"></script>
+    <script src="./flatlab/js/bootstrap.bundle.min.js"></script>
+    <script class="include" type="text/javascript" src="./flatlab/js/jquery.dcjqaccordion.2.7.js"></script>
+    
+    <!-- for image gallery -->
+    <script src="./flatlab/assets/fancybox/source/jquery.fancybox.js"></script>
+    
+    
+    <script src="./flatlab/js/jquery.scrollTo.min.js"></script>
+    <script src="./flatlab/js/slidebars.min.js"></script>
+    <script src="./flatlab/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="./flatlab/js/respond.min.js" ></script>
+
+    <!--common script for all pages-->
+    <script src="./flatlab/js/common-scripts.js"></script>
+
+	<!-- for image gallery -->
+    <script src="./flatlab/js/modernizr.custom.js"></script>
+    <script src="./flatlab/js/toucheffects.js"></script>
+
+  <script type="text/javascript">
+  	// for image gallery
+      $(function() {
+        //    fancybox
+          jQuery(".fancybox").fancybox();
+      });
+
+  </script>
+
+
+  </body>
+</html>

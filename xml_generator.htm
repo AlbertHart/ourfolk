@@ -1,0 +1,142 @@
+<html>
+
+<head>
+
+        <title>XML Generator</title>
+
+
+
+        <script async src="https://cse.google.com/cse.js?cx=003736524176309227229:whsyk9ptpff"></script>
+            <script src="./alh_common/alh_sprintf.js?v=278"></script>
+        <script src="./alh_common/alh_common.js?v=278"></script>
+        <script src="hart-ged.js?v=278"></script>
+        <script src="ged_read.js?v=278"></script>
+        <script src="bk_data.js?v=278"></script>
+
+        <script>
+                var iptr;
+               var fptr;
+               var cptr;
+               var pptr;
+       
+               var notes;
+
+               var show_pages = true;
+       
+               //var show_all = true;
+               //var single_record = "@I6@";
+       
+               
+               var ged_objects;
+       
+
+               
+       
+               //show_all = true;
+       
+               read_ged_file();
+           </script>
+       
+    
+
+    <body>
+            <h3>Click Below to save JSON</h3>
+            <br><button onclick="do_save();">Save JSON</button> 
+
+
+        <script>
+            iout = 0;
+
+            date = new Date().toISOString().substr(0, 10);
+
+            base_pages = ["families.htm", "resources.htm"];
+            person_pages = ["ged_person.htm" , "ancestors.htm", "descendants.htm"];
+
+            sxml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+            sxml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+            sxml += sprintf(`    <url><loc>https://ourfolkgen.com/</loc><lastmod>%s</lastmod></url>\n`, date);
+            sxml += sprintf(`    <url><loc>https://ourfolkgen.com/index.html</loc><lastmod>%s</lastmod></url>\n`, date);
+
+            spages = "";
+
+            for (ip = 0; ip < base_pages.length; ip++)
+            {
+                sxml += sprintf(`    <url><loc>https://ourfolkgen.com/ourfolk/%s</loc><lastmod>%s</lastmod></url>\n`, base_pages[ip], date);
+            }
+
+            spages = "<table><tr><th>ID</th><th>Name</th>\n";
+            for (ip = 0; ip < person_pages.length; ip++)
+            {
+                spages += sprintf("<th>%s</th>", person_pages[ip]);
+            }
+            spages += "</tr>\n";   
+
+            var keys = Object.keys(ged_objects);
+            for (var ik = 0; ik < keys.length; ik++)
+            {
+                key = keys[ik];
+                //console.log("ik: %s %s", ik, key);
+                if (key.substr(0,2) == "@F")
+                    break;
+                if (key.substr(0,2) != "@I")
+                    continue;
+                iptr = get_person(key);
+                
+
+                spages += sprintf("<tr><td>%s</td><td>%s</td>\n", iptr.id, iptr.full_name); 
+
+                for (ip = 0; ip < person_pages.length; ip++)
+                 {
+                    
+                    sxml += sprintf(`    <url><loc>https://ourfolkgen.com/ourfolk/%s?id=%s</loc><lastmod>%s</lastmod></url>\n`, 
+                        person_pages[ip], iptr.id, date);
+
+                    
+                    spages += sprintf("<td><a href='%s?id=%s'>%s</a></td>", 
+                        person_pages[ip], iptr.id, person_pages[ip]);
+                }
+                spages += "</tr>\n";   
+
+            }
+            spages += "</table>\n";
+            sxml += `</urlset>\n`;
+            document.writeln(sprintf("<h3>SXML Created: %s bytes</h3>", sxml.length));
+            document.writeln("<br><br>" + spages);
+
+
+    function do_save()
+    {
+        save_xml_data(sxml, "sitemap.xml")
+    }
+
+    function save_xml_data(sxml, file_name) 
+    {
+        var a = document.createElement("a");
+        document.body.appendChild(a);
+        a.style = "display: none";
+
+
+        console.log("sxml.length: %s", sxml.length);
+        
+
+
+        //bytes = new TextEncoder().encode(sxml);
+        blob = new Blob([sxml], {
+            type: "application/txt;charset=utf-8"});
+
+
+        //var blob = new Blob([sxml], {type: "text/plain;charset=utf-8"});
+        var url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = file_name;
+        a.click();
+        window.URL.revokeObjectURL(url);
+
+        document.writeln(sprintf("<h3>%s Saved: %s bytes</h3>", file_name, sxml.length));
+
+    }
+
+            </script>
+    </body>
+</head>
+</html>

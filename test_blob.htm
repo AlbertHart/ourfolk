@@ -1,0 +1,37 @@
+
+
+<a id="link" target="_blank" download="file.txt"> Click here to Download</a>
+
+<script>
+
+    var file;
+    var data = [];
+    data.push("This is a test\n");
+    data.push("Of creating a file\n");
+    data.push("In a browser\n");
+    string = "";
+    for (ii = 0; ii < 300000; ii++)
+    {
+        data.push("New line: " + ii + "aaa bbb ccc ddd eee fff ggg hhh iii jjj kkk lll mmm nnn\n");
+        string += "New line: " + ii + "aaa bbb ccc ddd eee fff ggg hhh iii jjj kkk lll mmm nnn\n";
+    }
+    var properties = {type: 'text/plain'}; // Specify the file's mime-type.
+
+    //data = string.split("\n"); // works ok
+    data = [string];
+    console.log("string DATA length: %s", data.length);
+
+    try {
+      // Specify the filename using the File constructor, but ...
+      console.log("SAVE AS FILE");
+      file = new File(data, "file.txt", properties);
+    } catch (e) {
+      // ... fall back to the Blob constructor if that isn't supported.
+      console.log("SAVE AS BLOB");
+      file = new Blob(data, properties);
+    }
+    console.log("After create FILE");
+    var url = URL.createObjectURL(file);
+    document.getElementById('link').href = url;
+    console.log("After set link href");
+    </script>
