@@ -12,7 +12,7 @@ var show_all;
 var show_bad;   // show lines which cannot br read
  
 var image_path = "https://ourfolkgen.com/images";
-image_path = "/images";
+image_path = "/ourfolk/images";
 var resource_path = "https://ourfolkgen.com/resources";
 
 if (document.location.href.startsWith("file:"))

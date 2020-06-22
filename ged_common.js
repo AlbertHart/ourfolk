@@ -3,7 +3,7 @@ console.log("IN ged_common.js");
 
 
 var image_path = "https://ourfolkgen.com/images";
-image_path = "/images";
+image_path = "/ourfolk/images";
 var resource_path = "https://ourfolkgen.com/resources";
 var do_throw = false;
 var do_process_ged_file = true; // do do_process() in hart-ged.js unless this is set to false
